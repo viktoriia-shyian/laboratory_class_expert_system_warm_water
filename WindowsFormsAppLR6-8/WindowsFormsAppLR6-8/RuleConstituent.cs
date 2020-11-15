@@ -4,16 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace WpfAppLR6_8
+namespace WindowsFormsAppLR6_8
 {
-    class FactualBasis
+    public interface RuleConstituent
     {
-        List<Fact> facts;
-
-
-
-
-
-
     }
 }

@@ -4,26 +4,19 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace WpfAppLR6_8
+namespace WindowsFormsAppLR6_8
 {
     public class Fact : RuleConstituent
     {
-        #region fields
-
-        int id;
-        bool value;
-        bool logical_negation;
-        string description;
-
-        #endregion
-
         #region properties
 
         public int Id { get; set; }
 
         public int Value { get; set; }
-        
+
         public string Description { get; set; }
+
+        public bool LogicalNegation { get; set; }
 
         #endregion
 
@@ -34,12 +27,19 @@ namespace WpfAppLR6_8
 
         }
 
-        public Fact(int id, bool value, bool logical_negation, string description)
+        public Fact(int id, int value, string description)
         {
-            this.id = id;
-            this.value = value;
-            this.logical_negation = logical_negation;
-            this.description = description;
+            Id = id;
+            Value = value;
+            Description = description;
+        }
+
+        public Fact(int id, int value, bool logical_negation, string description)
+        {
+            Id = id;
+            Value = value;
+            LogicalNegation = logical_negation;
+            Description = description;
         }
 
         #endregion

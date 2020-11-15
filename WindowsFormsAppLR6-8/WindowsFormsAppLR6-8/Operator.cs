@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace WpfAppLR6_8
+namespace WindowsFormsAppLR6_8
 {
-    class Operator : RuleConstituent
+    public class Operator : RuleConstituent
     {
         OperatorType type;
 
@@ -32,7 +32,7 @@ namespace WpfAppLR6_8
 
     }
 
-    enum OperatorType
+    public enum OperatorType
     {
         Conjunction, //∧
         Disjunction, //∨
@@ -41,7 +41,7 @@ namespace WpfAppLR6_8
 
     static class Extensions
     {
-        
+
         public static int Calculate(this OperatorType negation, Fact a)
         {
             if (negation == OperatorType.Negation)
@@ -73,7 +73,7 @@ namespace WpfAppLR6_8
                     {
                         return 1;
                     }
-                    
+
                     return a.Value + b.Value;
 
                 default:
@@ -82,5 +82,4 @@ namespace WpfAppLR6_8
             }
         }
     }
-
 }
