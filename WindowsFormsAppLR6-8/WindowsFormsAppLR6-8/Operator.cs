@@ -8,26 +8,26 @@ namespace WindowsFormsAppLR6_8
 {
     public class Operator : RuleConstituent
     {
-        OperatorType type;
 
         public Operator()
         {
 
         }
 
-        public Operator(OperatorType type)
+        public Operator(OperatorType type) : base(type)
         {
-            this.type = type;
+
         }
 
-        public int Calculate(Fact a)
+
+        public override int Calculate(RuleConstituent a)
         {
-            return type.Calculate(a);
+            return TypeOp.Calculate(a);
         }
 
-        public int Calculate(Fact a, Fact b)
+        public override int Calculate(RuleConstituent a, RuleConstituent b)
         {
-            return type.Calculate(a, b);
+            return TypeOp.Calculate(a, b);
         }
 
     }
@@ -42,7 +42,7 @@ namespace WindowsFormsAppLR6_8
     static class Extensions
     {
 
-        public static int Calculate(this OperatorType negation, Fact a)
+        public static int Calculate(this OperatorType negation, RuleConstituent a)
         {
             if (negation == OperatorType.Negation)
             {
@@ -60,21 +60,23 @@ namespace WindowsFormsAppLR6_8
             throw new Exception("Operator type isn't negation");
         }
 
-        public static int Calculate(this OperatorType operation_type, Fact a, Fact b)
+        public static int Calculate(this OperatorType operation_type, RuleConstituent a, RuleConstituent b)
         {
             switch (operation_type)
             {
                 case OperatorType.Conjunction:
-                    return a.Value * b.Value;
+                    return a.Value & b.Value;
 
                 case OperatorType.Disjunction:
-                    int disjunction = a.Value + b.Value;
+                    int disjunction = a.Value | b.Value;
+                    /*
                     if (disjunction == 2)
                     {
                         return 1;
                     }
+                    */
 
-                    return a.Value + b.Value;
+                    return disjunction;// a.Value + b.Value;
 
                 default:
                     throw new Exception("Operator type doesn't have implementation");

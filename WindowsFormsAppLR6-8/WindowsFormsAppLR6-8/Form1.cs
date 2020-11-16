@@ -168,14 +168,59 @@ namespace WindowsFormsAppLR6_8
             return knowledge_base.FindFactById(Convert.ToInt32(temp));
         }
 
-        private void button2_Click(object sender, EventArgs e)
+        private void button2_Click(object sender, EventArgs e)//opposite facts
+        {
+            knowledge_base.OppositeFacts = new List<List<Fact>>();
+
+            List<List<Fact>> list = new List<List<Fact>>();
+            List<Fact> temp_list;
+            for (int i = 0; i < dataGridView_opposite_facts.Rows.Count - 1; i++)
+            {
+                string temp_str = dataGridView_opposite_facts.Rows[i].Cells[0].Value.ToString();
+                temp_list = new List<Fact>();
+
+                for (int j = 0; j < temp_str.Length; j++)
+                {
+                    if (temp_list.ElementAt(j).Equals("f"))
+                    {
+                        string val = "";
+
+                        while (!temp_list.ElementAt(j + 1).Equals(";"))
+                        {
+                            j++;
+
+                            val += temp_list.ElementAt(j);
+                        }
+
+                        temp_list.Add(ConvertRowToFact(dataGridView_facts.Rows[Convert.ToInt32(val) - 1]));
+                    }
+                }
+
+                list.Add(temp_list);
+            }
+
+            knowledge_base.OppositeFacts = list; 
+        }
+
+        private void button1_Click(object sender, EventArgs e)//next
         {
 
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        private void button_add_to_opposite_facts_Click(object sender, EventArgs e)
         {
+            foreach (DataGridViewRow row in dataGridView_facts.SelectedCells)
+            {
+                foreach (DataGridViewCell cell in dataGridView_opposite_facts.SelectedCells)
+                {
+                    if (cell.Value == null)
+                    {
+                        cell.Value = "";
+                    }
 
+                    cell.Value += "f" + (row.Index + 1).ToString() + ";";
+                }
+            }
         }
     }
 }

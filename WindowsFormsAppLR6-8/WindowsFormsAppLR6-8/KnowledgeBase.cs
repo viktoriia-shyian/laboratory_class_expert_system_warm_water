@@ -12,6 +12,8 @@ namespace WindowsFormsAppLR6_8
 
         public List<Rulebase> RuleBases { get; set; }
 
+        public List<List<Fact>> OppositeFacts { get; set; }
+
         public KnowledgeBase()
         {
 
@@ -27,5 +29,8 @@ namespace WindowsFormsAppLR6_8
 
             throw new Exception("There is no fact with id = " + id);
         }
+
+
+
     }
 }

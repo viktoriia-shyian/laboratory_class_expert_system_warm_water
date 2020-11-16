@@ -8,30 +8,35 @@ namespace WindowsFormsAppLR6_8
 {
     class Rule
     {
-        public List<RuleConstituent> Expression { get; set; }
+        public List<RuleConstituent> RuleExpression { get; set; }
 
         public void AddConstituent(RuleConstituent constituent)
         {
-            if (typeof(Fact) == constituent.GetType())
-            {
-                Console.WriteLine("Added fact");
-
-            }
-            else 
-            if (typeof(Operator) == constituent.GetType())
-            {
-                Console.WriteLine("Added Operator");
-
-            }
-            else
-            {
-                Console.WriteLine("Doesn't work");
-
-            }
+            RuleExpression.Add(constituent);
         }
 
         public int Calculate()
         {
+            for (int i = 0; i < RuleExpression.Count; i++)
+            {
+                RuleConstituent constituent = RuleExpression.ElementAt(i);
+
+                if (typeof(Operator) == constituent.GetType())
+                {
+                    if (constituent.TypeOp == OperatorType.Negation)
+                    {
+                        constituent.Calculate(RuleExpression.ElementAt(i + 1));
+                    }
+                    else
+                    {
+                        constituent.Calculate(RuleExpression.ElementAt(i - 1), RuleExpression.ElementAt(i + 1));
+                    }
+                }
+
+//                if (typeof(Fact) == constituent.GetType())
+
+            }
+
             return 0;
         }
 
