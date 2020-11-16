@@ -47,6 +47,7 @@
             this.button_update_opposite_facts = new System.Windows.Forms.Button();
             this.button_add_to_opposite_facts = new System.Windows.Forms.Button();
             this.Facts = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.button_set_default_data = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView_facts)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView_rulebases)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView_opposite_facts)).BeginInit();
@@ -58,7 +59,7 @@
             this.dataGridView_facts.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.Value,
             this.Description});
-            this.dataGridView_facts.Location = new System.Drawing.Point(16, 15);
+            this.dataGridView_facts.Location = new System.Drawing.Point(13, 45);
             this.dataGridView_facts.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.dataGridView_facts.Name = "dataGridView_facts";
             this.dataGridView_facts.RowHeadersWidth = 51;
@@ -88,7 +89,7 @@
             this.P,
             this.FunctionRulebase,
             this.FactRulebase});
-            this.dataGridView_rulebases.Location = new System.Drawing.Point(16, 470);
+            this.dataGridView_rulebases.Location = new System.Drawing.Point(13, 500);
             this.dataGridView_rulebases.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.dataGridView_rulebases.Name = "dataGridView_rulebases";
             this.dataGridView_rulebases.RowHeadersWidth = 51;
@@ -125,7 +126,7 @@
             // 
             // button_update_facts
             // 
-            this.button_update_facts.Location = new System.Drawing.Point(16, 207);
+            this.button_update_facts.Location = new System.Drawing.Point(13, 237);
             this.button_update_facts.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.button_update_facts.Name = "button_update_facts";
             this.button_update_facts.Size = new System.Drawing.Size(219, 28);
@@ -136,7 +137,7 @@
             // 
             // button_add_selected_fact_to_rule
             // 
-            this.button_add_selected_fact_to_rule.Location = new System.Drawing.Point(243, 208);
+            this.button_add_selected_fact_to_rule.Location = new System.Drawing.Point(240, 238);
             this.button_add_selected_fact_to_rule.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.button_add_selected_fact_to_rule.Name = "button_add_selected_fact_to_rule";
             this.button_add_selected_fact_to_rule.Size = new System.Drawing.Size(220, 28);
@@ -147,7 +148,7 @@
             // 
             // button_negation
             // 
-            this.button_negation.Location = new System.Drawing.Point(16, 662);
+            this.button_negation.Location = new System.Drawing.Point(13, 692);
             this.button_negation.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.button_negation.Name = "button_negation";
             this.button_negation.Size = new System.Drawing.Size(100, 28);
@@ -158,7 +159,7 @@
             // 
             // button_conjunction
             // 
-            this.button_conjunction.Location = new System.Drawing.Point(124, 662);
+            this.button_conjunction.Location = new System.Drawing.Point(121, 692);
             this.button_conjunction.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.button_conjunction.Name = "button_conjunction";
             this.button_conjunction.Size = new System.Drawing.Size(100, 28);
@@ -169,7 +170,7 @@
             // 
             // button_disjunction
             // 
-            this.button_disjunction.Location = new System.Drawing.Point(232, 662);
+            this.button_disjunction.Location = new System.Drawing.Point(229, 692);
             this.button_disjunction.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.button_disjunction.Name = "button_disjunction";
             this.button_disjunction.Size = new System.Drawing.Size(100, 28);
@@ -180,7 +181,7 @@
             // 
             // button_update_knowledge_base
             // 
-            this.button_update_knowledge_base.Location = new System.Drawing.Point(340, 662);
+            this.button_update_knowledge_base.Location = new System.Drawing.Point(337, 692);
             this.button_update_knowledge_base.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.button_update_knowledge_base.Name = "button_update_knowledge_base";
             this.button_update_knowledge_base.Size = new System.Drawing.Size(187, 28);
@@ -191,7 +192,7 @@
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(535, 662);
+            this.button1.Location = new System.Drawing.Point(532, 692);
             this.button1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(201, 28);
@@ -205,7 +206,7 @@
             this.dataGridView_opposite_facts.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView_opposite_facts.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.Facts});
-            this.dataGridView_opposite_facts.Location = new System.Drawing.Point(16, 242);
+            this.dataGridView_opposite_facts.Location = new System.Drawing.Point(13, 272);
             this.dataGridView_opposite_facts.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.dataGridView_opposite_facts.Name = "dataGridView_opposite_facts";
             this.dataGridView_opposite_facts.RowHeadersWidth = 51;
@@ -214,7 +215,7 @@
             // 
             // button_update_opposite_facts
             // 
-            this.button_update_opposite_facts.Location = new System.Drawing.Point(16, 434);
+            this.button_update_opposite_facts.Location = new System.Drawing.Point(13, 464);
             this.button_update_opposite_facts.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.button_update_opposite_facts.Name = "button_update_opposite_facts";
             this.button_update_opposite_facts.Size = new System.Drawing.Size(720, 28);
@@ -225,7 +226,7 @@
             // 
             // button_add_to_opposite_facts
             // 
-            this.button_add_to_opposite_facts.Location = new System.Drawing.Point(470, 207);
+            this.button_add_to_opposite_facts.Location = new System.Drawing.Point(467, 237);
             this.button_add_to_opposite_facts.Name = "button_add_to_opposite_facts";
             this.button_add_to_opposite_facts.Size = new System.Drawing.Size(266, 29);
             this.button_add_to_opposite_facts.TabIndex = 11;
@@ -240,11 +241,22 @@
             this.Facts.Name = "Facts";
             this.Facts.Width = 125;
             // 
+            // button_set_default_data
+            // 
+            this.button_set_default_data.Location = new System.Drawing.Point(13, 14);
+            this.button_set_default_data.Name = "button_set_default_data";
+            this.button_set_default_data.Size = new System.Drawing.Size(720, 24);
+            this.button_set_default_data.TabIndex = 12;
+            this.button_set_default_data.Text = "Використати дані за замовчуванням";
+            this.button_set_default_data.UseVisualStyleBackColor = true;
+            this.button_set_default_data.Click += new System.EventHandler(this.button_set_default_data_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(752, 708);
+            this.ClientSize = new System.Drawing.Size(748, 735);
+            this.Controls.Add(this.button_set_default_data);
             this.Controls.Add(this.button_add_to_opposite_facts);
             this.Controls.Add(this.button_update_opposite_facts);
             this.Controls.Add(this.dataGridView_opposite_facts);
@@ -289,6 +301,7 @@
         private System.Windows.Forms.Button button_update_opposite_facts;
         private System.Windows.Forms.Button button_add_to_opposite_facts;
         private System.Windows.Forms.DataGridViewTextBoxColumn Facts;
+        private System.Windows.Forms.Button button_set_default_data;
     }
 }
 

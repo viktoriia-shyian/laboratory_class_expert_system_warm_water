@@ -27,6 +27,11 @@ namespace WindowsFormsAppLR6_8
 
         #endregion
 
+        public override int Calculate()
+        {
+            return TypeOp.Calculate(this);
+        }
+
         public override string ToString()
         {
             return "f" + Id;

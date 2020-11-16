@@ -49,12 +49,17 @@ namespace WindowsFormsAppLR6_8
 
         #endregion
 
+        public virtual int Calculate()
+        {
+            throw new Exception("Doesn't have implementation");
+        }
+
         public virtual int Calculate(RuleConstituent a)
         {
             throw new Exception("Doesn't have implementation");
         }
 
-        public virtual int Calculate(RuleConstituent a, RuleConstituent b)
+        public virtual int Calculate(int a, int b)
         {
             throw new Exception("Doesn't have implementation");
         }

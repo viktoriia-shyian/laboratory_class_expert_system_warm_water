@@ -12,32 +12,49 @@ namespace WindowsFormsAppLR6_8
 
         public void AddConstituent(RuleConstituent constituent)
         {
+            RuleConstituent last = RuleExpression.Last();
+
+            if (last.GetType() == typeof(Operator) &&
+                last.TypeOp == OperatorType.Negation)
+            {
+                RuleExpression.RemoveAt(RuleExpression.Count - 1);
+
+                constituent.TypeOp = OperatorType.Negation;
+            }
+
             RuleExpression.Add(constituent);
         }
 
         public int Calculate()
         {
-            for (int i = 0; i < RuleExpression.Count; i++)
-            {
-                RuleConstituent constituent = RuleExpression.ElementAt(i);
+            int sum = RuleExpression.ElementAt(0).Calculate();
 
-                if (typeof(Operator) == constituent.GetType())
+            for (int i = 1; i + 1 < RuleExpression.Count; i++)
+            {
+                RuleConstituent constituent_pos_oper = RuleExpression.ElementAt(i);
+                RuleConstituent constituent_pos_fact = RuleExpression.ElementAt(i + 1);
+
+                if (typeof(Operator) == constituent_pos_oper.GetType() && 
+                    typeof(Fact) == constituent_pos_fact.GetType())
                 {
-                    if (constituent.TypeOp == OperatorType.Negation)
+
+                    if (constituent_pos_fact.TypeOp != OperatorType.Negation)
                     {
-                        constituent.Calculate(RuleExpression.ElementAt(i + 1));
+                        sum = constituent_pos_oper.Calculate(
+                            sum,
+                            constituent_pos_fact.Value);
+
                     }
                     else
                     {
-                        constituent.Calculate(RuleExpression.ElementAt(i - 1), RuleExpression.ElementAt(i + 1));
+                        sum = constituent_pos_oper.Calculate(
+                            sum,
+                            constituent_pos_fact.Calculate());
                     }
                 }
-
-//                if (typeof(Fact) == constituent.GetType())
-
             }
 
-            return 0;
+            return sum;
         }
 
 

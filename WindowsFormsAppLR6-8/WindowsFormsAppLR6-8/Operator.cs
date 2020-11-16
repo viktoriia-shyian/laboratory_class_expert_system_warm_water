@@ -25,7 +25,7 @@ namespace WindowsFormsAppLR6_8
             return TypeOp.Calculate(a);
         }
 
-        public override int Calculate(RuleConstituent a, RuleConstituent b)
+        public override int Calculate(int a, int b)
         {
             return TypeOp.Calculate(a, b);
         }
@@ -60,15 +60,15 @@ namespace WindowsFormsAppLR6_8
             throw new Exception("Operator type isn't negation");
         }
 
-        public static int Calculate(this OperatorType operation_type, RuleConstituent a, RuleConstituent b)
+        public static int Calculate(this OperatorType operation_type, int a, int b)
         {
             switch (operation_type)
             {
                 case OperatorType.Conjunction:
-                    return a.Value & b.Value;
+                    return a & b;
 
                 case OperatorType.Disjunction:
-                    int disjunction = a.Value | b.Value;
+                    int disjunction = a | b;
                     /*
                     if (disjunction == 2)
                     {
