@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace WindowsFormsAppLR6_8
 {
-    class Rulebase
+    public class Rulebase
     {
         public int Id { get; set; }
         public Rule A { get; set; }
@@ -34,8 +34,10 @@ namespace WindowsFormsAppLR6_8
 
         public string Fuction()
         {
-            FactFuctionFluence.Value = OperatorType.Negation.Calculate(FactFuctionFluence);
-            KnowledgeBase.ReSetFactualBasis();
+            FactFuctionFluence.TypeOp = OperatorType.Negation;
+            FactFuctionFluence.Calculate();
+
+            KnowledgeBase.ReSetFactualBasis(FactFuctionFluence);
 
             return FuctionMessage + "(" + FactFuctionInput.ToString() + ")";
         }

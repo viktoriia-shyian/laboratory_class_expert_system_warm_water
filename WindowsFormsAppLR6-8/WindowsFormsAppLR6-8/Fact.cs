@@ -29,7 +29,10 @@ namespace WindowsFormsAppLR6_8
 
         public override int Calculate()
         {
-            return TypeOp.Calculate(this);
+            Value = TypeOp.Calculate(KnowledgeBase.FactualBasis.ElementAt(
+                KnowledgeBase.GetIndexInListFactualBasisById(Id)));
+
+            return Value;
         }
 
         public override string ToString()

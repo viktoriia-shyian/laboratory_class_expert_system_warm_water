@@ -6,20 +6,23 @@ using System.Threading.Tasks;
 
 namespace WindowsFormsAppLR6_8
 {
-    class Rule
+    public class Rule
     {
-        public List<RuleConstituent> RuleExpression { get; set; }
+        public List<RuleConstituent> RuleExpression = new List<RuleConstituent>();
 
         public void AddConstituent(RuleConstituent constituent)
         {
-            RuleConstituent last = RuleExpression.Last();
-
-            if (last.GetType() == typeof(Operator) &&
-                last.TypeOp == OperatorType.Negation)
+            if (RuleExpression.Count > 0)
             {
-                RuleExpression.RemoveAt(RuleExpression.Count - 1);
+                RuleConstituent last = RuleExpression.Last();
 
-                constituent.TypeOp = OperatorType.Negation;
+                if (last.GetType() == typeof(Operator) &&
+                    last.TypeOp == OperatorType.Negation)
+                {
+                    RuleExpression.RemoveAt(RuleExpression.Count - 1);
+
+                    constituent.TypeOp = OperatorType.Negation;
+                }
             }
 
             RuleExpression.Add(constituent);
@@ -42,7 +45,9 @@ namespace WindowsFormsAppLR6_8
                     {
                         sum = constituent_pos_oper.Calculate(
                             sum,
-                            constituent_pos_fact.Value);
+                            KnowledgeBase.FactualBasis.ElementAt(
+                                KnowledgeBase.GetIndexInListFactualBasisById(constituent_pos_fact.Id)).Value
+                                );
 
                     }
                     else
@@ -57,6 +62,17 @@ namespace WindowsFormsAppLR6_8
             return sum;
         }
 
+        public override string ToString()
+        {
+            string str = "";
+
+            foreach (RuleConstituent r in RuleExpression)
+            {
+                str += r.ToString();
+            }
+
+            return str;
+        }
 
     }
 }

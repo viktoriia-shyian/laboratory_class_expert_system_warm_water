@@ -30,6 +30,28 @@ namespace WindowsFormsAppLR6_8
             return TypeOp.Calculate(a, b);
         }
 
+        public override string ToString()
+        {
+            if (TypeOp == OperatorType.Negation)
+            {
+                return "¬";
+
+            }
+            else
+            if (TypeOp == OperatorType.Conjunction)
+            {
+                return "∧";
+
+            }
+            else
+            if (TypeOp == OperatorType.Disjunction)
+            {
+                return "∨";
+            }
+
+            throw new Exception("Not so operator");
+        }
+
     }
 
     public enum OperatorType
@@ -68,15 +90,7 @@ namespace WindowsFormsAppLR6_8
                     return a & b;
 
                 case OperatorType.Disjunction:
-                    int disjunction = a | b;
-                    /*
-                    if (disjunction == 2)
-                    {
-                        return 1;
-                    }
-                    */
-
-                    return disjunction;// a.Value + b.Value;
+                    return a | b;
 
                 default:
                     throw new Exception("Operator type doesn't have implementation");
