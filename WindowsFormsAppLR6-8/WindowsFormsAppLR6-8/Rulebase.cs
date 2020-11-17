@@ -13,7 +13,6 @@ namespace WindowsFormsAppLR6_8
         public Rule P { get; set; }
         public string FuctionMessage { get; set; }
         public Fact FactFuctionInput { get; set; }
-        public Fact FactFuctionFluence { get; set; }
 
         public Rulebase()
         {
@@ -21,25 +20,43 @@ namespace WindowsFormsAppLR6_8
         }
 
         public Rulebase(int id, Rule a, Rule p, string fuction_message, 
-            Fact fact_fuction_input, Fact fact_fuction_fluence)
+            Fact fact_fuction_input)
         {
             Id = id;
             A = a;
             P = p;
             FuctionMessage = fuction_message;
             FactFuctionInput = fact_fuction_input;
-            FactFuctionFluence = fact_fuction_fluence;
         }
 
 
         public string Fuction()
         {
-            FactFuctionFluence.TypeOp = OperatorType.Negation;
-            FactFuctionFluence.Calculate();
+            foreach (RelationRow r in KnowledgeBase.RelationRows)
+            {
+                if (r.function_name == FuctionMessage)
+                {
+                    bool condition_match = true;
 
-            KnowledgeBase.ReSetFactualBasis(FactFuctionFluence);
+                    foreach (Fact f in r.startState)
+                    {
+                        if (KnowledgeBase.FactualBasis.ElementAt(
+                            KnowledgeBase.GetIndexInListFactualBasisById(f.Id)).Value != f.Value
+                            )
+                            condition_match = false;
 
-            return FuctionMessage + "(" + FactFuctionInput.ToString() + ")";
+                    }
+
+                    if (condition_match)
+                    {
+                        r.ApplyChanges();
+                    }
+                }
+            }
+            //KnowledgeBase.ReSetFactualBasis(changed_fact);
+
+            return FuctionMessage + "(" + FactFuctionInput.ToString() + ") \n" + Environment.NewLine +
+                KnowledgeBase.FactualBasisToString();
         }
     }
 }

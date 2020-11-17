@@ -16,6 +16,8 @@ namespace WindowsFormsAppLR6_8
 
         public static Fact TargetFact = new Fact();
 
+        public static List<RelationRow> RelationRows = new List<RelationRow>();
+
         public KnowledgeBase()
         {
 
@@ -77,33 +79,47 @@ namespace WindowsFormsAppLR6_8
         public string StartCalculations()
         {
             string steps = "";
+            steps += FactualBasisToString() + Environment.NewLine;
 
-            for(int i = 0, step = 1; i < RuleBases.Count; i++, step++)
+            for (int i = 0, step = 1; i < RuleBases.Count; i++, step++)
             {
                 Rulebase rulebase = RuleBases.ElementAt(i);
-                steps += step + ". Продукція " + rulebase.Id + "\n";
-                
+                steps += step + ". Продукція " + (rulebase.Id + 1) + Environment.NewLine;
+                steps += FactualBasisToString() + Environment.NewLine;
+
+
                 if (rulebase.P.Calculate() == 1)
                 {
-                    steps += step + ". P = 1\n";
+                    step++;
+                    steps += step + ". P = " + rulebase.P.ToString() + " = 1" + Environment.NewLine;
+                    steps += FactualBasisToString() + Environment.NewLine;
 
                     if (rulebase.A.Calculate() == 1)
                     {
-                        steps += step + ". A = 1\n";
+                        step++;
+                        steps += step + ". A = " + rulebase.A.ToString() + " = 1" + Environment.NewLine;
+                        steps += FactualBasisToString() + Environment.NewLine;
 
-                        steps += step + ". Функція " + rulebase.Fuction() + "\n";
+                        step++;
+                        steps += step + ". Функція " + rulebase.Fuction() + Environment.NewLine;// "\n";
                         i = 0;
+                        steps += FactualBasisToString() + Environment.NewLine;
+
                     }
                     else
                     {
-                        steps += step + ". A = 0\n";
+                        step++;
+                        steps += step + ". A = " + rulebase.A.ToString() + " = 0" + Environment.NewLine;
+                        steps += FactualBasisToString() + Environment.NewLine;
 
                     }
 
                 }
                 else
                 {
-                    steps += step + ". P = 0\n";
+                    step++;
+                    steps += step + ". P = " + rulebase.P.ToString() + " = 0" + Environment.NewLine;
+                    steps += FactualBasisToString() + Environment.NewLine;
 
                 }
 
@@ -115,6 +131,17 @@ namespace WindowsFormsAppLR6_8
             return steps;
         }
 
+        public static string FactualBasisToString()
+        {
+            string str = "";
+
+            foreach (Fact f in FactualBasis)
+            {
+                str += f.ToString() + "=" + f.Value + "; ";
+            }
+
+            return str;
+        }
 
 
 

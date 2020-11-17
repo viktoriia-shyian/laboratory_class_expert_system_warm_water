@@ -29,12 +29,14 @@
         private void InitializeComponent()
         {
             this.dataGridView_facts = new System.Windows.Forms.DataGridView();
+            this.Value = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Description = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.TargetFact = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             this.dataGridView_rulebases = new System.Windows.Forms.DataGridView();
             this.A = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.P = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.FunctionRulebase = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.InputFactRulebase = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.FactRulebaseFluence = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.button_update_facts = new System.Windows.Forms.Button();
             this.button_add_selected_fact_to_rule = new System.Windows.Forms.Button();
             this.button_negation = new System.Windows.Forms.Button();
@@ -45,14 +47,22 @@
             this.button_update_opposite_facts = new System.Windows.Forms.Button();
             this.button_add_to_opposite_facts = new System.Windows.Forms.Button();
             this.button_set_default_data = new System.Windows.Forms.Button();
-            this.Value = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Description = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.TargetFact = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             this.dataGridView_opposite_facts = new System.Windows.Forms.DataGridView();
             this.OppositeFacts = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridView_relations = new System.Windows.Forms.DataGridView();
+            this.FunctionName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.StartState = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ValuesStartState = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Fact = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.FactStartState = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.FactEndState = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.button_add_to_relations = new System.Windows.Forms.Button();
+            this.button_add_function_to_changes_table = new System.Windows.Forms.Button();
+            this.button_update_relations = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView_facts)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView_rulebases)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView_opposite_facts)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView_relations)).BeginInit();
             this.SuspendLayout();
             // 
             // dataGridView_facts
@@ -62,13 +72,34 @@
             this.Value,
             this.Description,
             this.TargetFact});
-            this.dataGridView_facts.Location = new System.Drawing.Point(13, 45);
+            this.dataGridView_facts.Location = new System.Drawing.Point(13, 13);
             this.dataGridView_facts.Margin = new System.Windows.Forms.Padding(4);
             this.dataGridView_facts.Name = "dataGridView_facts";
             this.dataGridView_facts.RowHeadersWidth = 51;
             this.dataGridView_facts.Size = new System.Drawing.Size(720, 185);
             this.dataGridView_facts.TabIndex = 0;
             this.dataGridView_facts.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView_facts_CellContentClick);
+            // 
+            // Value
+            // 
+            this.Value.HeaderText = "Значення";
+            this.Value.MinimumWidth = 6;
+            this.Value.Name = "Value";
+            this.Value.Width = 125;
+            // 
+            // Description
+            // 
+            this.Description.HeaderText = "Опис";
+            this.Description.MinimumWidth = 6;
+            this.Description.Name = "Description";
+            this.Description.Width = 200;
+            // 
+            // TargetFact
+            // 
+            this.TargetFact.HeaderText = "Чи є цільовим станом";
+            this.TargetFact.MinimumWidth = 6;
+            this.TargetFact.Name = "TargetFact";
+            this.TargetFact.Width = 125;
             // 
             // dataGridView_rulebases
             // 
@@ -77,9 +108,8 @@
             this.A,
             this.P,
             this.FunctionRulebase,
-            this.InputFactRulebase,
-            this.FactRulebaseFluence});
-            this.dataGridView_rulebases.Location = new System.Drawing.Point(12, 466);
+            this.InputFactRulebase});
+            this.dataGridView_rulebases.Location = new System.Drawing.Point(13, 241);
             this.dataGridView_rulebases.Margin = new System.Windows.Forms.Padding(4);
             this.dataGridView_rulebases.Name = "dataGridView_rulebases";
             this.dataGridView_rulebases.RowHeadersWidth = 51;
@@ -114,19 +144,12 @@
             this.InputFactRulebase.Name = "InputFactRulebase";
             this.InputFactRulebase.Width = 125;
             // 
-            // FactRulebaseFluence
-            // 
-            this.FactRulebaseFluence.HeaderText = "Факт, що зміюється";
-            this.FactRulebaseFluence.MinimumWidth = 6;
-            this.FactRulebaseFluence.Name = "FactRulebaseFluence";
-            this.FactRulebaseFluence.Width = 125;
-            // 
             // button_update_facts
             // 
-            this.button_update_facts.Location = new System.Drawing.Point(13, 237);
+            this.button_update_facts.Location = new System.Drawing.Point(13, 206);
             this.button_update_facts.Margin = new System.Windows.Forms.Padding(4);
             this.button_update_facts.Name = "button_update_facts";
-            this.button_update_facts.Size = new System.Drawing.Size(219, 28);
+            this.button_update_facts.Size = new System.Drawing.Size(245, 27);
             this.button_update_facts.TabIndex = 2;
             this.button_update_facts.Text = "Оновити фактологічну базу";
             this.button_update_facts.UseVisualStyleBackColor = true;
@@ -134,10 +157,10 @@
             // 
             // button_add_selected_fact_to_rule
             // 
-            this.button_add_selected_fact_to_rule.Location = new System.Drawing.Point(240, 238);
+            this.button_add_selected_fact_to_rule.Location = new System.Drawing.Point(266, 205);
             this.button_add_selected_fact_to_rule.Margin = new System.Windows.Forms.Padding(4);
             this.button_add_selected_fact_to_rule.Name = "button_add_selected_fact_to_rule";
-            this.button_add_selected_fact_to_rule.Size = new System.Drawing.Size(220, 28);
+            this.button_add_selected_fact_to_rule.Size = new System.Drawing.Size(230, 28);
             this.button_add_selected_fact_to_rule.TabIndex = 3;
             this.button_add_selected_fact_to_rule.Text = "Додати до правила";
             this.button_add_selected_fact_to_rule.UseVisualStyleBackColor = true;
@@ -145,10 +168,10 @@
             // 
             // button_negation
             // 
-            this.button_negation.Location = new System.Drawing.Point(12, 658);
+            this.button_negation.Location = new System.Drawing.Point(13, 434);
             this.button_negation.Margin = new System.Windows.Forms.Padding(4);
             this.button_negation.Name = "button_negation";
-            this.button_negation.Size = new System.Drawing.Size(100, 28);
+            this.button_negation.Size = new System.Drawing.Size(28, 28);
             this.button_negation.TabIndex = 4;
             this.button_negation.Text = "¬";
             this.button_negation.UseVisualStyleBackColor = true;
@@ -156,10 +179,10 @@
             // 
             // button_conjunction
             // 
-            this.button_conjunction.Location = new System.Drawing.Point(120, 658);
+            this.button_conjunction.Location = new System.Drawing.Point(49, 434);
             this.button_conjunction.Margin = new System.Windows.Forms.Padding(4);
             this.button_conjunction.Name = "button_conjunction";
-            this.button_conjunction.Size = new System.Drawing.Size(100, 28);
+            this.button_conjunction.Size = new System.Drawing.Size(28, 28);
             this.button_conjunction.TabIndex = 5;
             this.button_conjunction.Text = "∧";
             this.button_conjunction.UseVisualStyleBackColor = true;
@@ -167,10 +190,10 @@
             // 
             // button_disjunction
             // 
-            this.button_disjunction.Location = new System.Drawing.Point(228, 658);
+            this.button_disjunction.Location = new System.Drawing.Point(85, 434);
             this.button_disjunction.Margin = new System.Windows.Forms.Padding(4);
             this.button_disjunction.Name = "button_disjunction";
-            this.button_disjunction.Size = new System.Drawing.Size(100, 28);
+            this.button_disjunction.Size = new System.Drawing.Size(28, 28);
             this.button_disjunction.TabIndex = 6;
             this.button_disjunction.Text = "∨";
             this.button_disjunction.UseVisualStyleBackColor = true;
@@ -178,7 +201,7 @@
             // 
             // button_update_knowledge_base
             // 
-            this.button_update_knowledge_base.Location = new System.Drawing.Point(336, 658);
+            this.button_update_knowledge_base.Location = new System.Drawing.Point(121, 434);
             this.button_update_knowledge_base.Margin = new System.Windows.Forms.Padding(4);
             this.button_update_knowledge_base.Name = "button_update_knowledge_base";
             this.button_update_knowledge_base.Size = new System.Drawing.Size(187, 28);
@@ -189,7 +212,7 @@
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(531, 658);
+            this.button1.Location = new System.Drawing.Point(532, 434);
             this.button1.Margin = new System.Windows.Forms.Padding(4);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(201, 28);
@@ -200,7 +223,7 @@
             // 
             // button_update_opposite_facts
             // 
-            this.button_update_opposite_facts.Location = new System.Drawing.Point(12, 430);
+            this.button_update_opposite_facts.Location = new System.Drawing.Point(13, 705);
             this.button_update_opposite_facts.Margin = new System.Windows.Forms.Padding(4);
             this.button_update_opposite_facts.Name = "button_update_opposite_facts";
             this.button_update_opposite_facts.Size = new System.Drawing.Size(720, 28);
@@ -211,9 +234,9 @@
             // 
             // button_add_to_opposite_facts
             // 
-            this.button_add_to_opposite_facts.Location = new System.Drawing.Point(467, 237);
+            this.button_add_to_opposite_facts.Location = new System.Drawing.Point(741, 548);
             this.button_add_to_opposite_facts.Name = "button_add_to_opposite_facts";
-            this.button_add_to_opposite_facts.Size = new System.Drawing.Size(266, 29);
+            this.button_add_to_opposite_facts.Size = new System.Drawing.Size(175, 42);
             this.button_add_to_opposite_facts.TabIndex = 11;
             this.button_add_to_opposite_facts.Text = "Додати до протиставних фактів";
             this.button_add_to_opposite_facts.UseVisualStyleBackColor = true;
@@ -221,41 +244,20 @@
             // 
             // button_set_default_data
             // 
-            this.button_set_default_data.Location = new System.Drawing.Point(13, 14);
+            this.button_set_default_data.Location = new System.Drawing.Point(13, 468);
             this.button_set_default_data.Name = "button_set_default_data";
-            this.button_set_default_data.Size = new System.Drawing.Size(720, 24);
+            this.button_set_default_data.Size = new System.Drawing.Size(1180, 28);
             this.button_set_default_data.TabIndex = 12;
             this.button_set_default_data.Text = "Використати дані за замовчуванням";
             this.button_set_default_data.UseVisualStyleBackColor = true;
             this.button_set_default_data.Click += new System.EventHandler(this.button_set_default_data_Click);
-            // 
-            // Value
-            // 
-            this.Value.HeaderText = "Значення";
-            this.Value.MinimumWidth = 6;
-            this.Value.Name = "Value";
-            this.Value.Width = 125;
-            // 
-            // Description
-            // 
-            this.Description.HeaderText = "Опис";
-            this.Description.MinimumWidth = 6;
-            this.Description.Name = "Description";
-            this.Description.Width = 200;
-            // 
-            // TargetFact
-            // 
-            this.TargetFact.HeaderText = "Чи є цільовим станом";
-            this.TargetFact.MinimumWidth = 6;
-            this.TargetFact.Name = "TargetFact";
-            this.TargetFact.Width = 125;
             // 
             // dataGridView_opposite_facts
             // 
             this.dataGridView_opposite_facts.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView_opposite_facts.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.OppositeFacts});
-            this.dataGridView_opposite_facts.Location = new System.Drawing.Point(12, 273);
+            this.dataGridView_opposite_facts.Location = new System.Drawing.Point(14, 548);
             this.dataGridView_opposite_facts.Name = "dataGridView_opposite_facts";
             this.dataGridView_opposite_facts.RowHeadersWidth = 51;
             this.dataGridView_opposite_facts.RowTemplate.Height = 24;
@@ -270,11 +272,104 @@
             this.OppositeFacts.Name = "OppositeFacts";
             this.OppositeFacts.Width = 125;
             // 
+            // dataGridView_relations
+            // 
+            this.dataGridView_relations.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridView_relations.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.FunctionName,
+            this.StartState,
+            this.ValuesStartState,
+            this.Fact,
+            this.FactStartState,
+            this.FactEndState});
+            this.dataGridView_relations.Location = new System.Drawing.Point(740, 13);
+            this.dataGridView_relations.Name = "dataGridView_relations";
+            this.dataGridView_relations.RowHeadersWidth = 51;
+            this.dataGridView_relations.RowTemplate.Height = 24;
+            this.dataGridView_relations.Size = new System.Drawing.Size(453, 413);
+            this.dataGridView_relations.TabIndex = 14;
+            // 
+            // FunctionName
+            // 
+            this.FunctionName.HeaderText = "Функція";
+            this.FunctionName.MinimumWidth = 6;
+            this.FunctionName.Name = "FunctionName";
+            this.FunctionName.Width = 125;
+            // 
+            // StartState
+            // 
+            this.StartState.HeaderText = "Початкові умови";
+            this.StartState.MinimumWidth = 6;
+            this.StartState.Name = "StartState";
+            this.StartState.Width = 125;
+            // 
+            // ValuesStartState
+            // 
+            this.ValuesStartState.HeaderText = "Значення початкових умов";
+            this.ValuesStartState.MinimumWidth = 6;
+            this.ValuesStartState.Name = "ValuesStartState";
+            this.ValuesStartState.Width = 125;
+            // 
+            // Fact
+            // 
+            this.Fact.HeaderText = "Факт";
+            this.Fact.MinimumWidth = 6;
+            this.Fact.Name = "Fact";
+            this.Fact.Width = 125;
+            // 
+            // FactStartState
+            // 
+            this.FactStartState.HeaderText = "Початковий стан змінюємого факту";
+            this.FactStartState.MinimumWidth = 6;
+            this.FactStartState.Name = "FactStartState";
+            this.FactStartState.Width = 125;
+            // 
+            // FactEndState
+            // 
+            this.FactEndState.HeaderText = "Кінцеве значення змінюємого факту";
+            this.FactEndState.MinimumWidth = 6;
+            this.FactEndState.Name = "FactEndState";
+            this.FactEndState.Width = 125;
+            // 
+            // button_add_to_relations
+            // 
+            this.button_add_to_relations.Location = new System.Drawing.Point(503, 205);
+            this.button_add_to_relations.Name = "button_add_to_relations";
+            this.button_add_to_relations.Size = new System.Drawing.Size(230, 28);
+            this.button_add_to_relations.TabIndex = 15;
+            this.button_add_to_relations.Text = "Додати до таблиці змін";
+            this.button_add_to_relations.UseVisualStyleBackColor = true;
+            this.button_add_to_relations.Click += new System.EventHandler(this.button2_Click_1);
+            // 
+            // button_add_function_to_changes_table
+            // 
+            this.button_add_function_to_changes_table.Location = new System.Drawing.Point(315, 433);
+            this.button_add_function_to_changes_table.Name = "button_add_function_to_changes_table";
+            this.button_add_function_to_changes_table.Size = new System.Drawing.Size(210, 29);
+            this.button_add_function_to_changes_table.TabIndex = 16;
+            this.button_add_function_to_changes_table.Text = "Додати функцію до таблиці зиін";
+            this.button_add_function_to_changes_table.UseVisualStyleBackColor = true;
+            this.button_add_function_to_changes_table.Click += new System.EventHandler(this.button_add_function_to_changes_table_Click);
+            // 
+            // button_update_relations
+            // 
+            this.button_update_relations.Location = new System.Drawing.Point(740, 434);
+            this.button_update_relations.Name = "button_update_relations";
+            this.button_update_relations.Size = new System.Drawing.Size(453, 28);
+            this.button_update_relations.TabIndex = 17;
+            this.button_update_relations.Text = "Оновити таблицю змін";
+            this.button_update_relations.UseVisualStyleBackColor = true;
+            this.button_update_relations.Click += new System.EventHandler(this.button_update_relations_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(747, 698);
+            this.ClientSize = new System.Drawing.Size(1205, 510);
+            this.Controls.Add(this.button_update_relations);
+            this.Controls.Add(this.button_add_function_to_changes_table);
+            this.Controls.Add(this.button_add_to_relations);
+            this.Controls.Add(this.dataGridView_relations);
             this.Controls.Add(this.dataGridView_opposite_facts);
             this.Controls.Add(this.button_set_default_data);
             this.Controls.Add(this.button_add_to_opposite_facts);
@@ -295,6 +390,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView_facts)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView_rulebases)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView_opposite_facts)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView_relations)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -313,16 +409,25 @@
         private System.Windows.Forms.Button button_update_opposite_facts;
         private System.Windows.Forms.Button button_add_to_opposite_facts;
         private System.Windows.Forms.Button button_set_default_data;
-        private System.Windows.Forms.DataGridViewTextBoxColumn A;
-        private System.Windows.Forms.DataGridViewTextBoxColumn P;
-        private System.Windows.Forms.DataGridViewTextBoxColumn FunctionRulebase;
-        private System.Windows.Forms.DataGridViewTextBoxColumn InputFactRulebase;
-        private System.Windows.Forms.DataGridViewTextBoxColumn FactRulebaseFluence;
         private System.Windows.Forms.DataGridViewTextBoxColumn Value;
         private System.Windows.Forms.DataGridViewTextBoxColumn Description;
         private System.Windows.Forms.DataGridViewCheckBoxColumn TargetFact;
         private System.Windows.Forms.DataGridView dataGridView_opposite_facts;
         private System.Windows.Forms.DataGridViewTextBoxColumn OppositeFacts;
+        private System.Windows.Forms.DataGridView dataGridView_relations;
+        private System.Windows.Forms.DataGridViewTextBoxColumn A;
+        private System.Windows.Forms.DataGridViewTextBoxColumn P;
+        private System.Windows.Forms.DataGridViewTextBoxColumn FunctionRulebase;
+        private System.Windows.Forms.DataGridViewTextBoxColumn InputFactRulebase;
+        private System.Windows.Forms.Button button_add_to_relations;
+        private System.Windows.Forms.DataGridViewTextBoxColumn FunctionName;
+        private System.Windows.Forms.DataGridViewTextBoxColumn StartState;
+        private System.Windows.Forms.DataGridViewTextBoxColumn ValuesStartState;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Fact;
+        private System.Windows.Forms.DataGridViewTextBoxColumn FactStartState;
+        private System.Windows.Forms.DataGridViewTextBoxColumn FactEndState;
+        private System.Windows.Forms.Button button_add_function_to_changes_table;
+        private System.Windows.Forms.Button button_update_relations;
     }
 }
 

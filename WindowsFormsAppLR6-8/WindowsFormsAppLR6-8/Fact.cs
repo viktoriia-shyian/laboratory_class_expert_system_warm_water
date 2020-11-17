@@ -14,6 +14,10 @@ namespace WindowsFormsAppLR6_8
         {
 
         }
+        public Fact(Fact fact) : base(fact.Id, fact.Value, fact.Description)
+        {
+
+        }
 
         public Fact(int id, int value, string description) : base(id, value, description)
         {
@@ -37,7 +41,7 @@ namespace WindowsFormsAppLR6_8
 
         public override string ToString()
         {
-            return "f" + Id;
+            return "f" + (Id + 1);
         }
 
     }

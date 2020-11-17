@@ -12,6 +12,7 @@ namespace WindowsFormsAppLR6_8
 
         public void AddConstituent(RuleConstituent constituent)
         {
+            /*
             if (RuleExpression.Count > 0)
             {
                 RuleConstituent last = RuleExpression.Last();
@@ -24,39 +25,75 @@ namespace WindowsFormsAppLR6_8
                     constituent.TypeOp = OperatorType.Negation;
                 }
             }
-
+            */
             RuleExpression.Add(constituent);
         }
 
         public int Calculate()
         {
-            int sum = RuleExpression.ElementAt(0).Calculate();
+            int sum = 0;
+            int index = 0;
 
-            for (int i = 1; i + 1 < RuleExpression.Count; i++)
+            if (typeof(Operator) == RuleExpression.ElementAt(0).GetType() &&
+                RuleExpression.ElementAt(0).TypeOp == OperatorType.Negation &&
+                    typeof(Fact) == RuleExpression.ElementAt(1).GetType())
             {
-                RuleConstituent constituent_pos_oper = RuleExpression.ElementAt(i);
-                RuleConstituent constituent_pos_fact = RuleExpression.ElementAt(i + 1);
+                sum = RuleExpression.ElementAt(0).Calculate(
+                    KnowledgeBase.FactualBasis.ElementAt(
+                        KnowledgeBase.GetIndexInListFactualBasisById(
+                                    RuleExpression.ElementAt(1).Id)));
+                index = 2;
+            }
+            else
+            if (typeof(Fact) == RuleExpression.ElementAt(0).GetType())
+            {
+                sum =
+                    KnowledgeBase.FactualBasis.ElementAt(
+                                KnowledgeBase.GetIndexInListFactualBasisById(
+                                    RuleExpression.ElementAt(0).Id)).Value;
+                index = 1;
+            }
 
-                if (typeof(Operator) == constituent_pos_oper.GetType() && 
-                    typeof(Fact) == constituent_pos_fact.GetType())
+
+            for (int i = index; i + 1 < RuleExpression.Count; i++)
+            {
+                if (
+                    i + 2 < RuleExpression.Count &&
+                    typeof(Operator) == RuleExpression.ElementAt(i).GetType() &&
+                    typeof(Operator) == RuleExpression.ElementAt(i + 1).GetType() &&
+                    RuleExpression.ElementAt(i + 1).TypeOp == OperatorType.Negation &&
+                    typeof(Fact) == RuleExpression.ElementAt(i + 2).GetType())
                 {
-
-                    if (constituent_pos_fact.TypeOp != OperatorType.Negation)
-                    {
-                        sum = constituent_pos_oper.Calculate(
-                            sum,
+                    int after_negation = RuleExpression.ElementAt(i + 1).Calculate(
                             KnowledgeBase.FactualBasis.ElementAt(
-                                KnowledgeBase.GetIndexInListFactualBasisById(constituent_pos_fact.Id)).Value
-                                );
+                            KnowledgeBase.GetIndexInListFactualBasisById(RuleExpression.ElementAt(i + 2).Id)));
 
-                    }
-                    else
-                    {
-                        sum = constituent_pos_oper.Calculate(
-                            sum,
-                            constituent_pos_fact.Calculate());
-                    }
+
+                    sum = RuleExpression.ElementAt(i).Calculate(
+                        sum,
+                        after_negation);
+                    i += 2;
+                    /*
+                        RuleExpression.ElementAt(i + 1).Calculate(
+                            KnowledgeBase.FactualBasis.ElementAt(
+                            KnowledgeBase.GetIndexInListFactualBasisById(RuleExpression.ElementAt(i + 2).Id))
+                            ));*/
                 }
+                else
+                if (
+                    i + 1 < RuleExpression.Count &&
+                    typeof(Operator) == RuleExpression.ElementAt(i).GetType() &&
+                    typeof(Fact) == RuleExpression.ElementAt(i + 1).GetType())
+                {
+                    sum = RuleExpression.ElementAt(i).Calculate(
+                        sum,
+                        KnowledgeBase.FactualBasis.ElementAt(
+                            KnowledgeBase.GetIndexInListFactualBasisById(RuleExpression.ElementAt(i + 1).Id)).Value
+                            );
+                    i++;
+                }
+                
+                Console.WriteLine(sum);
             }
 
             return sum;

@@ -40,8 +40,10 @@ namespace WindowsFormsAppLR6_8
 
         private void button_add_selected_fact_to_rule_Click(object sender, EventArgs e)
         {
-            foreach (DataGridViewRow row in dataGridView_facts.SelectedRows)
+            foreach (DataGridViewCell cell_fact in dataGridView_facts.SelectedCells)
             {
+                int fact_index_row = cell_fact.RowIndex;
+
                 foreach (DataGridViewCell cell in dataGridView_rulebases.SelectedCells)
                 {
                     if (cell.Value == null)
@@ -49,7 +51,7 @@ namespace WindowsFormsAppLR6_8
                         cell.Value = "";
                     }
 
-                    cell.Value += ConvertRowToFact(row).ToString();
+                    cell.Value += ConvertRowToFact(dataGridView_facts.Rows[fact_index_row]).ToString();
                 }
             }
         }
@@ -124,8 +126,7 @@ namespace WindowsFormsAppLR6_8
                     ConvertCellToRule(row.Cells[0]),
                     ConvertCellToRule(row.Cells[1]),
                     row.Cells[2].Value.ToString(),
-                    ConvertCellToFact(row.Cells[3]),
-                    ConvertCellToFact(row.Cells[4])
+                    ConvertCellToFact(row.Cells[3])
                     );
         }
 
@@ -279,7 +280,22 @@ namespace WindowsFormsAppLR6_8
                 {
                     dataGridView_rulebases.Rows[i].Cells[3].Value = rulebase.FactFuctionInput.ToString();
                 }
-                dataGridView_rulebases.Rows[i].Cells[4].Value = rulebase.FactFuctionFluence.ToString();
+//                dataGridView_rulebases.Rows[i].Cells[4].Value = rulebase.FactFuctionFluence.ToString();
+            }
+
+
+            for (int i = 0; i < KnowledgeBase.RelationRows.Count; i++)
+            {
+                dataGridView_relations.Rows.Add();
+
+                RelationRow relation_row = KnowledgeBase.RelationRows.ElementAt(i);
+
+                dataGridView_relations.Rows[i].Cells[0].Value = relation_row.function_name;
+                dataGridView_relations.Rows[i].Cells[1].Value = relation_row.StartStateToString();
+                dataGridView_relations.Rows[i].Cells[2].Value = relation_row.StartStateValuesToString();
+                dataGridView_relations.Rows[i].Cells[3].Value = relation_row.ChangeFactInfosToString();
+                dataGridView_relations.Rows[i].Cells[4].Value = relation_row.ChangeFactInfosValuesStartStateToString();
+                dataGridView_relations.Rows[i].Cells[5].Value = relation_row.ChangeFactInfosValuesEndStateToString();
             }
         }
 
@@ -306,7 +322,7 @@ namespace WindowsFormsAppLR6_8
 
             KnowledgeBase.TargetFact = f7;
 
-
+            /*
             KnowledgeBase.OppositeFacts = new List<List<Fact>>();
 
             List<Fact> opposite_facts_list = new List<Fact>();
@@ -315,6 +331,7 @@ namespace WindowsFormsAppLR6_8
             opposite_facts_list.Add(f7);
 
             KnowledgeBase.OppositeFacts.Add(opposite_facts_list);
+            */
 
 
             Operator conjunction = new Operator(OperatorType.Conjunction);
@@ -339,7 +356,7 @@ namespace WindowsFormsAppLR6_8
             rule1_p.AddConstituent(negation);
             rule1_p.AddConstituent(f7);
 
-            Rulebase rulebase1 = new Rulebase(0, rule1_a, rule1_p, "ВідкритиВентильХолодноїВодиНа", f8, f6);
+            Rulebase rulebase1 = new Rulebase(0, rule1_a, rule1_p, "ВідкритиВентильХолодноїВодиНа", f8);
 
 
             //< 2, «f2∧f6», «¬f3∧¬f7», «ВідкритиВентильГарячоїВодиНа(f8)»>
@@ -357,7 +374,7 @@ namespace WindowsFormsAppLR6_8
             rule2_p.AddConstituent(negation);
             rule2_p.AddConstituent(f7);
 
-            Rulebase rulebase2 = new Rulebase(1, rule2_a, rule2_p, "ВідкритиВентильГарячоїВодиНа", f8, f5);
+            Rulebase rulebase2 = new Rulebase(1, rule2_a, rule2_p, "ВідкритиВентильГарячоїВодиНа", f8);
 
 
             //< 3, «f1∧f2∧f5», «f3∧¬f7», «ЗакритиВентильГарячоїВоди()»>
@@ -376,7 +393,7 @@ namespace WindowsFormsAppLR6_8
             rule3_p.AddConstituent(negation);
             rule3_p.AddConstituent(f7);
 
-            Rulebase rulebase3 = new Rulebase(2, rule3_a, rule3_p, "ЗакритиВентильГарячоїВоди", null, f6);
+            Rulebase rulebase3 = new Rulebase(2, rule3_a, rule3_p, "ЗакритиВентильГарячоїВоди", null);
 
 
             //< 4, «f1∧f2∧f6», «f4∧¬f7», «ЗакритиВентильХолодноїВоди()»>
@@ -395,13 +412,45 @@ namespace WindowsFormsAppLR6_8
             rule4_p.AddConstituent(negation);
             rule4_p.AddConstituent(f7);
 
-            Rulebase rulebase4 = new Rulebase(3, rule4_a, rule4_p, "ЗакритиВентильХолодноїВоди", null, f5);
+            Rulebase rulebase4 = new Rulebase(3, rule4_a, rule4_p, "ЗакритиВентильХолодноїВоди", null);
 
 
             knowledge_base.RuleBases.Add(rulebase1);
             knowledge_base.RuleBases.Add(rulebase2);
             knowledge_base.RuleBases.Add(rulebase3);
             knowledge_base.RuleBases.Add(rulebase4);
+
+
+            List<Fact> start_state1 = new List<Fact>();
+            Fact fact5 = new Fact(f5); fact5.Value = 1;
+            start_state1.Add(fact5);
+
+            List<ChangeFactInfo> change_fact_infos1 = new List<ChangeFactInfo>();
+            ChangeFactInfo change_fact_info1 = new ChangeFactInfo(1, 0, 1); change_fact_infos1.Add(change_fact_info1);
+            ChangeFactInfo change_fact_info2 = new ChangeFactInfo(6, 0, 1); change_fact_infos1.Add(change_fact_info2);
+
+            RelationRow relation1 = new RelationRow("ВідкритиВентильХолодноїВодиНа", start_state1, change_fact_infos1);
+            KnowledgeBase.RelationRows.Add(relation1);
+
+
+            List<Fact> start_state2 = new List<Fact>();
+            Fact fact6 = new Fact(f6); fact6.Value = 1;
+            start_state2.Add(fact6);
+
+            List<ChangeFactInfo> change_fact_infos2 = new List<ChangeFactInfo>();
+            ChangeFactInfo change_fact_info2_1 = new ChangeFactInfo(0, 0, 1); change_fact_infos2.Add(change_fact_info2_1);
+            ChangeFactInfo change_fact_info2_2 = new ChangeFactInfo(6, 0, 1); change_fact_infos2.Add(change_fact_info2_2);
+
+            RelationRow relation2 = new RelationRow("ВідкритиВентильГарячоїВодиНа", start_state2, change_fact_infos2);
+            KnowledgeBase.RelationRows.Add(relation2);
+
+            /*
+            RelationRow relation1 = new RelationRow("ВідкритиВентильГарячоїВодиНа");
+            RelationRow relation1 = new RelationRow("ЗакритиВентильГарячоїВоди");
+            RelationRow relation1 = new RelationRow("ЗакритиВентильХолодноїВоди");
+            */
+
+
         }
 
         private void dataGridView_opposite_facts_CellContentClick(object sender, DataGridViewCellEventArgs e)
@@ -413,5 +462,197 @@ namespace WindowsFormsAppLR6_8
         {
 
         }
+
+        private void button2_Click_1(object sender, EventArgs e)//add fact to changes table
+        {
+            foreach (DataGridViewCell cell_fact in dataGridView_facts.SelectedCells)
+            {
+                int row_index_fact = cell_fact.RowIndex;
+
+                foreach (DataGridViewCell cell in dataGridView_relations.SelectedCells)
+                {
+                    int row_index_table = cell.RowIndex;
+                    int column_index_table = cell.RowIndex;
+
+                    if (cell.Value == null)
+                    {
+                        cell.Value = "";
+                        dataGridView_relations.Rows[row_index_table].Cells[column_index_table].Value = "";
+                    }
+
+                    cell.Value += "f" + (row_index_fact + 1) + ";";
+                    dataGridView_relations.Rows[row_index_table].Cells[column_index_table].Value += cell_fact.Value.ToString() + ";";
+                }
+            }
+        }
+
+        private void button_add_function_to_changes_table_Click(object sender, EventArgs e)
+        {
+            foreach (DataGridViewCell cell_func in dataGridView_rulebases.SelectedCells)
+            {
+                int row_index_rulebase = cell_func.RowIndex;
+
+                foreach (DataGridViewCell cell in dataGridView_relations.SelectedCells)
+                {
+                    int row_index_table = cell.RowIndex;
+
+                    dataGridView_relations.Rows[row_index_table].Cells[0].Value =
+                        dataGridView_rulebases.Rows[row_index_rulebase].Cells[2].Value;
+                }
+            }
+        }
+
+        private void button_update_relations_Click(object sender, EventArgs e)
+        {
+            for (int i = 0; i < dataGridView_relations.Rows.Count - 1; i++)
+            {
+                DataGridViewRow row = dataGridView_relations.Rows[i];
+
+                string function_name = row.Cells[0].Value.ToString();
+
+                string start_state_fact = row.Cells[1].Value.ToString();
+                string start_state_fact_value = row.Cells[2].Value.ToString();
+                List<Fact> startState = GetFactsFromStrings(start_state_fact, start_state_fact_value);
+
+                string fact_str = row.Cells[3].Value.ToString();
+                string fact_start_state = row.Cells[4].Value.ToString();
+                string fact_end_state = row.Cells[5].Value.ToString();
+                List<ChangeFactInfo> changeFactInfos = GetChangeFactInfoFromStrs(fact_str, fact_start_state, fact_end_state);
+
+
+                RelationRow relation_row = new RelationRow(function_name, startState, changeFactInfos);
+                KnowledgeBase.RelationRows.Add(relation_row);
+            }
+        }
+
+        private List<Fact> GetFactsFromStrings(string start_state_fact, string start_state_fact_value)
+        {
+            List<Fact> startState = new List<Fact>();
+
+            if (start_state_fact.IndexOf(";") == -1)
+            {
+                start_state_fact = start_state_fact.Remove(0, 1);
+
+                Fact fact = KnowledgeBase.FactualBasis.ElementAt(
+                    KnowledgeBase.GetIndexInListFactualBasisById(
+                        Convert.ToInt32(start_state_fact)
+                        )
+                    );
+
+                fact.Value = Convert.ToInt32(start_state_fact_value);
+
+                startState.Add(fact);
+            }
+            else
+            {
+                for (int j = 0; j < start_state_fact.Length; j++)
+                {
+                    if (start_state_fact.ElementAt(j).Equals("f"))
+                    {
+                        j++;
+
+                        string val = "";
+
+                        while (j < start_state_fact.Length && start_state_fact.ElementAt(j).Equals(";"))
+                        {
+                            val += start_state_fact.ElementAt(j);
+                            j++;
+                        }
+
+                        int fact_index = Convert.ToInt32(val);
+
+
+                        val = start_state_fact_value.ElementAt(0).ToString();
+                        start_state_fact_value = start_state_fact_value.Remove(0, 1);
+
+                        if (start_state_fact_value.ElementAt(0).Equals(";"))
+                        {
+                            start_state_fact_value = start_state_fact_value.Remove(0, 1);
+                        }
+
+                        int fact_value = Convert.ToInt32(val);
+
+
+                        Fact fact = KnowledgeBase.FactualBasis.ElementAt(
+                            KnowledgeBase.GetIndexInListFactualBasisById(
+                                Convert.ToInt32(fact_index)
+                                )
+                            );
+
+                        fact.Value = Convert.ToInt32(fact_value);
+
+                        startState.Add(fact);
+                    }
+                }
+            }
+
+            return startState;
+        }
+
+        private List<ChangeFactInfo> GetChangeFactInfoFromStrs(string fact_str, string fact_start_state, string fact_end_state)
+        {
+            List<ChangeFactInfo> changeFactInfos = new List<ChangeFactInfo>();
+
+            if (fact_str.IndexOf(";") == -1)
+            {
+                ChangeFactInfo change_fact_info = new ChangeFactInfo(
+                    Convert.ToInt32(fact_str.Remove(0, 1)),
+                    Convert.ToInt32(fact_start_state.Remove(1, 1)),
+                    Convert.ToInt32(fact_end_state.Remove(1, 1)));
+
+                changeFactInfos.Add(change_fact_info);
+            }
+            else
+            {
+                for (int i = 0; i < fact_str.Length; i++)
+                {
+                    if (fact_str.ElementAt(i).Equals("f"))
+                    {
+                        i++;
+
+                        string val = "";
+
+                        while (i < fact_str.Length && fact_str.ElementAt(i).Equals(";"))
+                        {
+                            val += fact_str.ElementAt(i);
+                            i++;
+                        }
+
+                        int fact_index = Convert.ToInt32(val);
+
+
+                        int fact_start_state_value = Convert.ToInt32(fact_start_state.ElementAt(0));
+                        int fact_end_state_value = Convert.ToInt32(fact_end_state.ElementAt(0));
+
+
+                        fact_start_state = fact_start_state.Remove(0, 1);
+
+                        if (fact_start_state.ElementAt(0).Equals(";"))
+                        {
+                            fact_start_state = fact_start_state.Remove(0, 1);
+                        }
+
+
+                        fact_end_state = fact_end_state.Remove(0, 1);
+
+                        if (fact_end_state.ElementAt(0).Equals(";"))
+                        {
+                            fact_end_state = fact_end_state.Remove(0, 1);
+                        }
+
+
+                        ChangeFactInfo change_fact_info = new ChangeFactInfo(
+                            fact_index,
+                            fact_start_state_value,
+                            fact_end_state_value);
+
+                        changeFactInfos.Add(change_fact_info);
+                    }
+                }
+            }
+
+            return changeFactInfos;
+        }
+
     }
 }

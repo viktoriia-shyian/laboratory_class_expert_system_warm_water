@@ -70,11 +70,16 @@ namespace WindowsFormsAppLR6_8
             {
                 if (a.Value == 0)
                 {
+                    
+                    Console.WriteLine(a.Id + "negation = " + 1.ToString());
+
                     return 1;
                 }
                 else
                 if (a.Value == 1)
                 {
+                    Console.WriteLine(a.Id + "negation = " + 0.ToString());
+
                     return 0;
                 }
             }
@@ -87,6 +92,8 @@ namespace WindowsFormsAppLR6_8
             switch (operation_type)
             {
                 case OperatorType.Conjunction:
+                    Console.WriteLine(a+ operation_type.ToString() + b + "=" + (a & b));
+
                     return a & b;
 
                 case OperatorType.Disjunction:
