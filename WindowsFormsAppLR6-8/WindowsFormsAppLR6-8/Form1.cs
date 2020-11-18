@@ -19,14 +19,22 @@ namespace WindowsFormsAppLR6_8
             InitializeComponent();
         }
 
+        /*
         private void dataGridView_facts_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
 
         }
-
-        private void dataGridView_facts_RowsAdded(object sender, DataGridViewRowsAddedEventArgs e)
+        
+        private void Form1_Load(object sender, EventArgs e)
         {
+
         }
+
+        private void dataGridView_opposite_facts_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
+        }
+        */
 
         private void button_update_facts_Click(object sender, EventArgs e)
         {
@@ -59,7 +67,7 @@ namespace WindowsFormsAppLR6_8
         private Fact ConvertRowToFact(DataGridViewRow row)
         {
             Fact fact = new Fact(
-                    Convert.ToInt32(row.Index + 1),
+                    Convert.ToInt32(row.Index),
                     Convert.ToInt32(row.Cells[0].Value),
                     row.Cells[1].Value.ToString());
 
@@ -70,11 +78,6 @@ namespace WindowsFormsAppLR6_8
             }
 
             return fact;
-        }
-
-        private void Form1_Load(object sender, EventArgs e)
-        {
-
         }
 
         private void button_negation_Click(object sender, EventArgs e)
@@ -122,7 +125,7 @@ namespace WindowsFormsAppLR6_8
         {
             return
                 new Rulebase(
-                    Convert.ToInt32(row.Index + 1),
+                    Convert.ToInt32(row.Index),
                     ConvertCellToRule(row.Cells[0]),
                     ConvertCellToRule(row.Cells[1]),
                     row.Cells[2].Value.ToString(),
@@ -161,7 +164,7 @@ namespace WindowsFormsAppLR6_8
 
                         i--;
 
-                        rule.AddConstituent(knowledge_base.FindFactById(Convert.ToInt32(id)));
+                        rule.AddConstituent(knowledge_base.FindFactById(Convert.ToInt32(id) - 1));
                         break;
                 }
             }
@@ -171,13 +174,18 @@ namespace WindowsFormsAppLR6_8
 
         private Fact ConvertCellToFact(DataGridViewCell cell)
         {
+            if (cell.Value == null)
+            {
+                return null;
+            }
+
             string temp = cell.Value.ToString();
             temp = temp.Remove(0, 1);
 
-            return knowledge_base.FindFactById(Convert.ToInt32(temp));
+            return knowledge_base.FindFactById(Convert.ToInt32(temp) - 1);
         }
 
-        private void button2_Click(object sender, EventArgs e)//update opposite facts
+        private void button_update_opposite_facts_Click(object sender, EventArgs e)
         {
             KnowledgeBase.OppositeFacts = new List<List<Fact>>();
 
@@ -211,7 +219,7 @@ namespace WindowsFormsAppLR6_8
             KnowledgeBase.OppositeFacts = list;
         }
 
-        private void button1_Click(object sender, EventArgs e)//next
+        private void button_describe_algorithm_Click(object sender, EventArgs e)//next
         {
             Form2 form = new Form2(knowledge_base);
             form.Show();
@@ -236,6 +244,12 @@ namespace WindowsFormsAppLR6_8
         private void button_set_default_data_Click(object sender, EventArgs e)
         {
             SetDefaultKnowledgeBase();
+
+            dataGridView_facts.Rows.Clear();
+            dataGridView_opposite_facts.Rows.Clear();
+            dataGridView_rulebases.Rows.Clear();
+            dataGridView_relations.Rows.Clear();
+
 
             for (int i = 0; i < KnowledgeBase.FactualBasis.Count; i++)
             {
@@ -282,7 +296,6 @@ namespace WindowsFormsAppLR6_8
                 }
 //                dataGridView_rulebases.Rows[i].Cells[4].Value = rulebase.FactFuctionFluence.ToString();
             }
-
 
             for (int i = 0; i < KnowledgeBase.RelationRows.Count; i++)
             {
@@ -421,39 +434,11 @@ namespace WindowsFormsAppLR6_8
             knowledge_base.RuleBases.Add(rulebase3);
             knowledge_base.RuleBases.Add(rulebase4);
 
-            /*
-            List<Fact> start_state1 = new List<Fact>();
-            Fact fact5 = new Fact(f5); fact5.Value = 1;
-            start_state1.Add(fact5);
-
-            List<ChangeFactInfo> change_fact_infos1 = new List<ChangeFactInfo>();
-            ChangeFactInfo change_fact_info1 = new ChangeFactInfo(1, 0, 1); change_fact_infos1.Add(change_fact_info1);
-            ChangeFactInfo change_fact_info2 = new ChangeFactInfo(6, 0, 1); change_fact_infos1.Add(change_fact_info2);
-
-            RelationRow relation1 = new RelationRow("ВідкритиВентильХолодноїВодиНа", start_state1, change_fact_infos1);
-            KnowledgeBase.RelationRows.Add(relation1);
-
-
-            List<Fact> start_state2 = new List<Fact>();
-            Fact fact6 = new Fact(f6); fact6.Value = 1;
-            start_state2.Add(fact6);
-
-            List<ChangeFactInfo> change_fact_infos2 = new List<ChangeFactInfo>();
-            ChangeFactInfo change_fact_info2_1 = new ChangeFactInfo(0, 0, 1); change_fact_infos2.Add(change_fact_info2_1);
-            ChangeFactInfo change_fact_info2_2 = new ChangeFactInfo(6, 0, 1); change_fact_infos2.Add(change_fact_info2_2);
-
-            RelationRow relation2 = new RelationRow("ВідкритиВентильГарячоїВодиНа", start_state2, change_fact_infos2);
-            KnowledgeBase.RelationRows.Add(relation2);
-
-            /*
-            RelationRow relation1 = new RelationRow("ВідкритиВентильГарячоїВодиНа");
-            RelationRow relation1 = new RelationRow("ЗакритиВентильГарячоїВоди");
-            RelationRow relation1 = new RelationRow("ЗакритиВентильХолодноїВоди");
-            */
-
 
             //1
             //1_1
+            KnowledgeBase.RelationRows = new List<RelationRow>();
+
             List<Fact> start_state1_1 = new List<Fact>();
             Fact fact2 = new Fact(f2); fact2.Value = 0; start_state1_1.Add(fact2);
 
@@ -519,17 +504,7 @@ namespace WindowsFormsAppLR6_8
 
         }
 
-        private void dataGridView_opposite_facts_CellContentClick(object sender, DataGridViewCellEventArgs e)
-        {
-
-        }
-
-        private void dataGridView_opposite_facts_CellContentClick_1(object sender, DataGridViewCellEventArgs e)
-        {
-
-        }
-
-        private void button2_Click_1(object sender, EventArgs e)//add fact to changes table
+        private void button_add_to_relations_Click(object sender, EventArgs e)
         {
             foreach (DataGridViewCell cell_fact in dataGridView_facts.SelectedCells)
             {
@@ -594,6 +569,13 @@ namespace WindowsFormsAppLR6_8
         private List<Fact> GetFactsFromStrings(string start_state_fact, string start_state_fact_value)
         {
             List<Fact> startState = new List<Fact>();
+
+
+            if(start_state_fact.Equals("") || start_state_fact_value.Equals(""))
+            {
+                return startState;
+            }
+            else
 
             if (start_state_fact.IndexOf(";") == -1)
             {

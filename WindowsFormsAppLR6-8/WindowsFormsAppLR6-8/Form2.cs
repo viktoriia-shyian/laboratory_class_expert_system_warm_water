@@ -24,9 +24,18 @@ namespace WindowsFormsAppLR6_8
             textBox_result.Text = knowledge_base.StartCalculations();
         }
 
-        private void textBox_result_TextChanged(object sender, EventArgs e)
+        private void button_write_to_file_Click(object sender, EventArgs e)
         {
+            System.IO.File.WriteAllText($"{textBox_file_path.Text}.txt", textBox_result.Text.ToString());
+            MessageBox.Show("Файл" + $"{textBox_file_path.Text}.txt" + " був створений");
+        }
 
+        private void button_choose_folder_Click(object sender, EventArgs e)
+        {
+            if (folderBrowserDialog1.ShowDialog() == DialogResult.OK)
+            {
+                textBox_file_path.Text = folderBrowserDialog1.SelectedPath + "\\";
+            }
         }
     }
 }

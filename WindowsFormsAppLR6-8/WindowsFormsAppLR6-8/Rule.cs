@@ -12,20 +12,6 @@ namespace WindowsFormsAppLR6_8
 
         public void AddConstituent(RuleConstituent constituent)
         {
-            /*
-            if (RuleExpression.Count > 0)
-            {
-                RuleConstituent last = RuleExpression.Last();
-
-                if (last.GetType() == typeof(Operator) &&
-                    last.TypeOp == OperatorType.Negation)
-                {
-                    RuleExpression.RemoveAt(RuleExpression.Count - 1);
-
-                    constituent.TypeOp = OperatorType.Negation;
-                }
-            }
-            */
             RuleExpression.Add(constituent);
         }
 
@@ -73,11 +59,6 @@ namespace WindowsFormsAppLR6_8
                         sum,
                         after_negation);
                     i += 2;
-                    /*
-                        RuleExpression.ElementAt(i + 1).Calculate(
-                            KnowledgeBase.FactualBasis.ElementAt(
-                            KnowledgeBase.GetIndexInListFactualBasisById(RuleExpression.ElementAt(i + 2).Id))
-                            ));*/
                 }
                 else
                 if (
