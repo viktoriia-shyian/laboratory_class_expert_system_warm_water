@@ -55,7 +55,7 @@ namespace WindowsFormsAppLR6_8
             }
             //KnowledgeBase.ReSetFactualBasis(changed_fact);
 
-            return FuctionMessage + "(" + FactFuctionInput.ToString() + ") \n" + Environment.NewLine +
+            return FuctionMessage + "(" + FactFuctionInput.ToString() + ")" + Environment.NewLine +
                 KnowledgeBase.FactualBasisToString();
         }
     }

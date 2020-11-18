@@ -85,32 +85,27 @@ namespace WindowsFormsAppLR6_8
             {
                 Rulebase rulebase = RuleBases.ElementAt(i);
                 steps += step + ". Продукція " + (rulebase.Id + 1) + Environment.NewLine;
-                steps += FactualBasisToString() + Environment.NewLine;
 
 
                 if (rulebase.P.Calculate() == 1)
                 {
                     step++;
                     steps += step + ". P = " + rulebase.P.ToString() + " = 1" + Environment.NewLine;
-                    steps += FactualBasisToString() + Environment.NewLine;
 
                     if (rulebase.A.Calculate() == 1)
                     {
                         step++;
                         steps += step + ". A = " + rulebase.A.ToString() + " = 1" + Environment.NewLine;
-                        steps += FactualBasisToString() + Environment.NewLine;
 
                         step++;
                         steps += step + ". Функція " + rulebase.Fuction() + Environment.NewLine;// "\n";
-                        i = 0;
-                        steps += FactualBasisToString() + Environment.NewLine;
+                        i = -1;
 
                     }
                     else
                     {
                         step++;
                         steps += step + ". A = " + rulebase.A.ToString() + " = 0" + Environment.NewLine;
-                        steps += FactualBasisToString() + Environment.NewLine;
 
                     }
 
@@ -119,7 +114,6 @@ namespace WindowsFormsAppLR6_8
                 {
                     step++;
                     steps += step + ". P = " + rulebase.P.ToString() + " = 0" + Environment.NewLine;
-                    steps += FactualBasisToString() + Environment.NewLine;
 
                 }
 
@@ -127,6 +121,7 @@ namespace WindowsFormsAppLR6_8
 
             TargetFact.Value = 1;
             ReSetFactualBasis(TargetFact);
+            steps += FactualBasisToString() + Environment.NewLine;
 
             return steps;
         }

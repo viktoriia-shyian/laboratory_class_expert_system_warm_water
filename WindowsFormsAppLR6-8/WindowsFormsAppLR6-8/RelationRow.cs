@@ -95,6 +95,7 @@ namespace WindowsFormsAppLR6_8
         }
 
     }
+
     public class ChangeFactInfo
     {
         public int fact_id;

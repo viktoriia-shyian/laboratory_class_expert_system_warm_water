@@ -64,7 +64,7 @@ namespace WindowsFormsAppLR6_8
                     row.Cells[1].Value.ToString());
 
             DataGridViewCell cell = row.Cells[2];
-            if (cell.Value != null && (bool)cell.Value)
+            if (cell.Value != null && cell.Value.Equals(CheckState.Checked))//CheckState.Checked
             {
                 KnowledgeBase.TargetFact = fact;
             }
@@ -322,7 +322,8 @@ namespace WindowsFormsAppLR6_8
 
             KnowledgeBase.TargetFact = f7;
 
-            /*
+
+            //OppositeFacts
             KnowledgeBase.OppositeFacts = new List<List<Fact>>();
 
             List<Fact> opposite_facts_list = new List<Fact>();
@@ -331,7 +332,7 @@ namespace WindowsFormsAppLR6_8
             opposite_facts_list.Add(f7);
 
             KnowledgeBase.OppositeFacts.Add(opposite_facts_list);
-            */
+            
 
 
             Operator conjunction = new Operator(OperatorType.Conjunction);
@@ -420,7 +421,7 @@ namespace WindowsFormsAppLR6_8
             knowledge_base.RuleBases.Add(rulebase3);
             knowledge_base.RuleBases.Add(rulebase4);
 
-
+            /*
             List<Fact> start_state1 = new List<Fact>();
             Fact fact5 = new Fact(f5); fact5.Value = 1;
             start_state1.Add(fact5);
@@ -450,6 +451,71 @@ namespace WindowsFormsAppLR6_8
             RelationRow relation1 = new RelationRow("ЗакритиВентильХолодноїВоди");
             */
 
+
+            //1
+            //1_1
+            List<Fact> start_state1_1 = new List<Fact>();
+            Fact fact2 = new Fact(f2); fact2.Value = 0; start_state1_1.Add(fact2);
+
+            List<ChangeFactInfo> change_fact_infos1_1 = new List<ChangeFactInfo>();
+            ChangeFactInfo change_fact_info1_1_1 = new ChangeFactInfo(1, 0, 1); change_fact_infos1_1.Add(change_fact_info1_1_1);
+
+            RelationRow relation1_1 = new RelationRow("ВідкритиВентильХолодноїВодиНа", start_state1_1, change_fact_infos1_1);
+            KnowledgeBase.RelationRows.Add(relation1_1);
+
+            //1_2
+            List<Fact> start_state1_2 = new List<Fact>();
+            fact2.Value = 1; start_state1_2.Add(fact2);
+
+            List<ChangeFactInfo> change_fact_infos1_2 = new List<ChangeFactInfo>();
+            ChangeFactInfo change_fact_info1_2_1 = new ChangeFactInfo(3, 0, 1); change_fact_infos1_2.Add(change_fact_info1_2_1);
+
+            RelationRow relation1_2 = new RelationRow("ВідкритиВентильХолодноїВодиНа", start_state1_2, change_fact_infos1_2);
+            KnowledgeBase.RelationRows.Add(relation1_2);
+
+
+            //2
+            //2_1
+            List<Fact> start_state2_1 = new List<Fact>();
+            Fact fact1 = new Fact(f1); fact1.Value = 0; start_state2_1.Add(fact1);
+
+            List<ChangeFactInfo> change_fact_infos2_1 = new List<ChangeFactInfo>();
+            ChangeFactInfo change_fact_info2_1_1 = new ChangeFactInfo(0, 0, 1); change_fact_infos2_1.Add(change_fact_info2_1_1);
+
+            RelationRow relation2_1 = new RelationRow("ВідкритиВентильГарячоїВодиНа", start_state2_1, change_fact_infos2_1);
+            KnowledgeBase.RelationRows.Add(relation2_1);
+
+            //2_2
+            List<Fact> start_state2_2 = new List<Fact>();
+            fact1.Value = 1; start_state2_2.Add(fact1);
+
+            List<ChangeFactInfo> change_fact_infos2_2 = new List<ChangeFactInfo>();
+            ChangeFactInfo change_fact_info2_2_1 = new ChangeFactInfo(2, 0, 1); change_fact_infos2_2.Add(change_fact_info2_2_1);
+
+            RelationRow relation2_2 = new RelationRow("ВідкритиВентильГарячоїВодиНа", start_state2_2, change_fact_infos2_2);
+            KnowledgeBase.RelationRows.Add(relation2_2);
+
+
+            //3
+            List<Fact> start_state3 = new List<Fact>();
+
+            List<ChangeFactInfo> change_fact_infos3 = new List<ChangeFactInfo>();
+            ChangeFactInfo change_fact_info3_1 = new ChangeFactInfo(0, 1, 0); change_fact_infos3.Add(change_fact_info3_1);
+            ChangeFactInfo change_fact_info3_2 = new ChangeFactInfo(2, 1, 0); change_fact_infos3.Add(change_fact_info3_2);
+
+            RelationRow relation3 = new RelationRow("ЗакритиВентильХолодноїВоди", start_state3, change_fact_infos3);
+            KnowledgeBase.RelationRows.Add(relation3);
+
+
+            //4
+            List<Fact> start_state4 = new List<Fact>();
+
+            List<ChangeFactInfo> change_fact_infos4 = new List<ChangeFactInfo>();
+            ChangeFactInfo change_fact_info4_1 = new ChangeFactInfo(1, 1, 0); change_fact_infos4.Add(change_fact_info4_1);
+            ChangeFactInfo change_fact_info4_2 = new ChangeFactInfo(3, 1, 0); change_fact_infos4.Add(change_fact_info4_2);
+
+            RelationRow relation4 = new RelationRow("ЗакритиВентильХолодноїВоди", start_state4, change_fact_infos4);
+            KnowledgeBase.RelationRows.Add(relation4);
 
         }
 
