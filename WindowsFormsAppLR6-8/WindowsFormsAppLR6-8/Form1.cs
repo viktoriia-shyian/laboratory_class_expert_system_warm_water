@@ -44,6 +44,8 @@ namespace WindowsFormsAppLR6_8
             {
                 KnowledgeBase.FactualBasis.Add(ConvertRowToFact(dataGridView_facts.Rows[i]));
             }
+
+            MessageBox.Show("Фактологічна база була оновлена");
         }
 
         private void button_add_selected_fact_to_rule_Click(object sender, EventArgs e)
@@ -119,6 +121,8 @@ namespace WindowsFormsAppLR6_8
                     ConvertRowToRulebase(dataGridView_rulebases.Rows[i])
                     );
             }
+
+            MessageBox.Show("База правил була оновлена");
         }
 
         private Rulebase ConvertRowToRulebase(DataGridViewRow row)
@@ -217,6 +221,8 @@ namespace WindowsFormsAppLR6_8
             }
 
             KnowledgeBase.OppositeFacts = list;
+
+            MessageBox.Show("База протиставних фактів була оновлена");
         }
 
         private void button_describe_algorithm_Click(object sender, EventArgs e)//next
@@ -599,6 +605,8 @@ namespace WindowsFormsAppLR6_8
                 RelationRow relation_row = new RelationRow(function_name, startState, changeFactInfos);
                 KnowledgeBase.RelationRows.Add(relation_row);
             }
+
+            MessageBox.Show("База змін була оновлена");
         }
 
         private List<Fact> GetFactsFromStrings(string start_state_fact, string start_state_fact_value)
