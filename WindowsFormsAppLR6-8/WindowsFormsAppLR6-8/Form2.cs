@@ -22,6 +22,7 @@ namespace WindowsFormsAppLR6_8
             InitializeComponent();
 
             textBox_result.Text = knowledge_base.StartCalculations();
+            textBox_belief_system.Text = knowledge_base.ReportForBeliefSystem;
         }
 
         private void button_write_to_file_Click(object sender, EventArgs e)

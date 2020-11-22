@@ -18,6 +18,13 @@ namespace WindowsFormsAppLR6_8
 
         public static List<RelationRow> RelationRows = new List<RelationRow>();
 
+        public List<Fact> FactualBasisOldState = new List<Fact>();
+        
+        public string Report = "";
+        
+        public string ReportForBeliefSystem = "";
+
+
         public KnowledgeBase()
         {
 
@@ -78,34 +85,43 @@ namespace WindowsFormsAppLR6_8
 
         public string StartCalculations()
         {
-            string steps = "";
-            steps += FactualBasisToString() + Environment.NewLine;
+            Report += FactualBasisToString() + Environment.NewLine;
+            ReportForBeliefSystem += FactualBasisStartStateToString() + Environment.NewLine;
 
             for (int i = 0, step = 1; i < RuleBases.Count; i++, step++)
             {
                 Rulebase rulebase = RuleBases.ElementAt(i);
-                steps += step + ". Продукція " + (rulebase.Id + 1) + Environment.NewLine;
+                Report += step + ". Продукція " + (rulebase.Id + 1) + Environment.NewLine;
+                ReportForBeliefSystem += step + ". Продукція " + (rulebase.Id + 1) + Environment.NewLine;
 
 
                 if (rulebase.P.Calculate() == 1)
                 {
                     step++;
-                    steps += step + ". P = " + rulebase.P.ToString() + " = 1" + Environment.NewLine;
+                    Report += step + ". P = " + rulebase.P.ToString() + " = 1" + Environment.NewLine;
+                    ReportForBeliefSystem += step + ". Блок P = 1" + Environment.NewLine;
 
                     if (rulebase.A.Calculate() == 1)
                     {
                         step++;
-                        steps += step + ". A = " + rulebase.A.ToString() + " = 1" + Environment.NewLine;
+                        Report += step + ". A = " + rulebase.A.ToString() + " = 1" + Environment.NewLine;
+                        ReportForBeliefSystem += step + ". Переходимо до ядра продукції (оскільки Р=1) намагаємося його активувати: " +
+                            "А=1 → ядро продукції " + rulebase.Id + " буде активоване." + Environment.NewLine;
 
+                        SetOldState();
+                        
                         step++;
-                        steps += step + ". Функція " + rulebase.Fuction() + Environment.NewLine;// "\n";
+                        Report += step + ". Функція " + rulebase.Fuction() + Environment.NewLine;// "\n";
+                        ReportForBeliefSystem += step + ". " + CheckStateDifferences(rulebase.FuctionMessage);
                         i = -1;
 
                     }
                     else
                     {
                         step++;
-                        steps += step + ". A = " + rulebase.A.ToString() + " = 0" + Environment.NewLine;
+                        Report += step + ". A = " + rulebase.A.ToString() + " = 0" + Environment.NewLine;
+                        ReportForBeliefSystem += step + ". Переходимо до ядра продукції (оскільки Р=1) намагаємося його активувати: " +
+                            "А=0 → ядро продукції " + rulebase.Id + " не буде активоване. Перехід до наступної продукції. " + Environment.NewLine;
 
                     }
 
@@ -113,7 +129,8 @@ namespace WindowsFormsAppLR6_8
                 else
                 {
                     step++;
-                    steps += step + ". P = " + rulebase.P.ToString() + " = 0" + Environment.NewLine;
+                    Report += step + ". P = " + rulebase.P.ToString() + " = 0" + Environment.NewLine;
+                    ReportForBeliefSystem += step + ". Блок P = 0" + Environment.NewLine;
 
                 }
 
@@ -121,9 +138,10 @@ namespace WindowsFormsAppLR6_8
 
             TargetFact.Value = 1;
             ReSetFactualBasis(TargetFact);
-            steps += FactualBasisToString() + Environment.NewLine;
+            Report += FactualBasisToString() + Environment.NewLine;
+            ReportForBeliefSystem += "Цільвий стан був досягнутий: " + TargetFact.MessageStateTrue + Environment.NewLine;
 
-            return steps;
+            return Report;
         }
 
         public static string FactualBasisToString()
@@ -136,6 +154,67 @@ namespace WindowsFormsAppLR6_8
             }
 
             return str;
+        }
+
+        public static string FactualBasisStartStateToString()
+        {
+            string str = "Початкові умови: " + Environment.NewLine;
+
+            foreach (Fact f in FactualBasis)
+            {
+                if (f.Value == 1 && f.Id != 7)
+                {
+                    str += f.Description + ", ";
+                }
+            }
+            str = str.Remove(str.Length - 2, 2);
+
+            return str;
+        }
+
+        string CheckStateDifferences(string function_name)
+        {
+            string str1 = "Була викликана функція " + function_name + ". ";
+            str1 += "Внаслідок дії функції набули дії такі зміни:" + Environment.NewLine;
+            string str = "";
+
+            for (int i = 0; i < FactualBasis.Count; i++)
+            {
+                if (FactualBasisOldState.ElementAt(i).Value != FactualBasis.ElementAt(i).Value)
+                {
+                    if (FactualBasis.ElementAt(i).Value == 0)
+                    {
+                        str += FactualBasis.ElementAt(i).MessageStateFalse + Environment.NewLine; ;
+                    }
+                    else
+                    {
+                        str += FactualBasis.ElementAt(i).MessageStateTrue + Environment.NewLine;
+                    }
+                }
+            }
+
+            if (str.Equals(""))
+            {
+                str = "Без змін" + Environment.NewLine;
+            }
+            else
+            {
+                str = str1 + str;
+                str.Remove(str.Length - 1, 1);
+            }
+
+            return str;
+        }
+
+        void SetOldState()
+        {
+            FactualBasisOldState = new List<Fact>();
+
+            foreach(Fact f in FactualBasis)
+            {
+                FactualBasisOldState.Add(new Fact(f));
+
+            }
         }
 
 

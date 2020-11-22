@@ -221,6 +221,24 @@ namespace WindowsFormsAppLR6_8
 
         private void button_describe_algorithm_Click(object sender, EventArgs e)//next
         {
+            KnowledgeBase.FactualBasis.ElementAt(0).MessageStateTrue = "вентиль гарячої води відкритий";
+            KnowledgeBase.FactualBasis.ElementAt(0).MessageStateTrue = "вентиль гарячої води закритий";
+            KnowledgeBase.FactualBasis.ElementAt(1).MessageStateTrue = "вентиль холодної води відкритий";
+            KnowledgeBase.FactualBasis.ElementAt(1).MessageStateTrue = "вентиль холодної води закритий";
+            KnowledgeBase.FactualBasis.ElementAt(2).MessageStateTrue = "вентиль гарячої води повністю відкритий";
+            KnowledgeBase.FactualBasis.ElementAt(2).MessageStateTrue = "вентиль гарячої води не повністю відкритий";
+            KnowledgeBase.FactualBasis.ElementAt(3).MessageStateTrue = "вентиль холодної води повністю відкритий";
+            KnowledgeBase.FactualBasis.ElementAt(3).MessageStateTrue = "вентиль холодної води не повністю відкритий";
+            KnowledgeBase.FactualBasis.ElementAt(4).MessageStateTrue = "вода стала гарячою";
+            KnowledgeBase.FactualBasis.ElementAt(4).MessageStateTrue = "";
+            KnowledgeBase.FactualBasis.ElementAt(5).MessageStateTrue = "вода стала холодною";
+            KnowledgeBase.FactualBasis.ElementAt(5).MessageStateTrue = "";
+            KnowledgeBase.FactualBasis.ElementAt(6).MessageStateTrue = "вода стала теплою";
+            KnowledgeBase.FactualBasis.ElementAt(6).MessageStateTrue = "";
+
+            KnowledgeBase.TargetFact.MessageStateTrue = "вода стала теплою";
+            KnowledgeBase.TargetFact.MessageStateFalse = "";
+
             Form2 form = new Form2(knowledge_base);
             form.Show();
         }
@@ -315,13 +333,30 @@ namespace WindowsFormsAppLR6_8
         private void SetDefaultKnowledgeBase()
         {
             Fact f1 = new Fact(0, 1, "вентиль гарячої води відкритий");
+            f1.MessageStateTrue = "вентиль гарячої води відкритий";
+            f1.MessageStateFalse = "вентиль гарячої води закритий";
             Fact f2 = new Fact(1, 1, "вентиль холодної води відкритий");
+            f2.MessageStateTrue = "вентиль холодної води відкритий";
+            f2.MessageStateFalse = "вентиль холодної води закритий";
             Fact f3 = new Fact(2, 0, "вентиль гарячої води повністю відкритий");
+            f3.MessageStateTrue = "вентиль гарячої води повністю відкритий";
+            f3.MessageStateFalse = "вентиль гарячої води не повністю відкритий";
             Fact f4 = new Fact(3, 0, "вентиль холодної води повністю відкритий");
+            f4.MessageStateTrue = "вентиль холодної води повністю відкритий";
+            f4.MessageStateFalse = "вентиль холодної води не повністю відкритий";
             Fact f5 = new Fact(4, 0, "вода гаряча");
+            f5.MessageStateTrue = "вода стала гарячою";
+            f5.MessageStateFalse = "";
             Fact f6 = new Fact(5, 1, "вода холодна");
+            f6.MessageStateTrue = "вода стала холодною";
+            f6.MessageStateFalse = "";
             Fact f7 = new Fact(6, 0, "вода тепла");
+            f7.MessageStateTrue = "вода стала теплою";
+            f7.MessageStateFalse = "";
             Fact f8 = new Fact(7, 1, "крок відкриття вентиля");
+            f8.MessageStateTrue = "";
+            f8.MessageStateFalse = "";
+
 
             KnowledgeBase.FactualBasis = new List<Fact>();
             KnowledgeBase.FactualBasis.Add(f1);

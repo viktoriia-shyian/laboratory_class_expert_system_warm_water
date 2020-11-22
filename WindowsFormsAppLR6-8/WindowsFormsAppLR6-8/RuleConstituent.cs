@@ -17,6 +17,10 @@ namespace WindowsFormsAppLR6_8
         public string Description { get; set; }
 
         public OperatorType TypeOp { get; set; }
+        
+        public string MessageStateTrue { get; set; }
+        
+        public string MessageStateFalse { get; set; }
 
         #endregion
 

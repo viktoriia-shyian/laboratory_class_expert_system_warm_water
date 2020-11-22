@@ -44,7 +44,6 @@ namespace WindowsFormsAppLR6_8
                             KnowledgeBase.GetIndexInListFactualBasisById(f.Id)).Value != f.Value
                             )
                             condition_match = false;
-
                     }
 
                     if (condition_match)

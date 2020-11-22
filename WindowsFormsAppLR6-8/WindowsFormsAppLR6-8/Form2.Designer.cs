@@ -33,24 +33,26 @@
             this.textBox_file_path = new System.Windows.Forms.TextBox();
             this.folderBrowserDialog1 = new System.Windows.Forms.FolderBrowserDialog();
             this.button_choose_folder = new System.Windows.Forms.Button();
+            this.textBox_belief_system = new System.Windows.Forms.TextBox();
             this.SuspendLayout();
             // 
             // textBox_result
             // 
-            this.textBox_result.Location = new System.Drawing.Point(9, 10);
-            this.textBox_result.Margin = new System.Windows.Forms.Padding(2);
+            this.textBox_result.Location = new System.Drawing.Point(12, 12);
+            this.textBox_result.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.textBox_result.Multiline = true;
             this.textBox_result.Name = "textBox_result";
             this.textBox_result.ReadOnly = true;
             this.textBox_result.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.textBox_result.Size = new System.Drawing.Size(410, 347);
+            this.textBox_result.Size = new System.Drawing.Size(545, 426);
             this.textBox_result.TabIndex = 0;
             // 
             // button_write_to_file
             // 
-            this.button_write_to_file.Location = new System.Drawing.Point(9, 388);
+            this.button_write_to_file.Location = new System.Drawing.Point(12, 478);
+            this.button_write_to_file.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.button_write_to_file.Name = "button_write_to_file";
-            this.button_write_to_file.Size = new System.Drawing.Size(410, 23);
+            this.button_write_to_file.Size = new System.Drawing.Size(1096, 28);
             this.button_write_to_file.TabIndex = 1;
             this.button_write_to_file.Text = "Записати в файл";
             this.button_write_to_file.UseVisualStyleBackColor = true;
@@ -58,31 +60,45 @@
             // 
             // textBox_file_path
             // 
-            this.textBox_file_path.Location = new System.Drawing.Point(9, 362);
+            this.textBox_file_path.Location = new System.Drawing.Point(12, 446);
+            this.textBox_file_path.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.textBox_file_path.Name = "textBox_file_path";
-            this.textBox_file_path.Size = new System.Drawing.Size(384, 20);
+            this.textBox_file_path.Size = new System.Drawing.Size(1061, 22);
             this.textBox_file_path.TabIndex = 2;
             // 
             // button_choose_folder
             // 
-            this.button_choose_folder.Location = new System.Drawing.Point(399, 362);
+            this.button_choose_folder.Location = new System.Drawing.Point(1081, 446);
+            this.button_choose_folder.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.button_choose_folder.Name = "button_choose_folder";
-            this.button_choose_folder.Size = new System.Drawing.Size(20, 20);
+            this.button_choose_folder.Size = new System.Drawing.Size(27, 25);
             this.button_choose_folder.TabIndex = 3;
             this.button_choose_folder.Text = "...";
             this.button_choose_folder.UseVisualStyleBackColor = true;
             this.button_choose_folder.Click += new System.EventHandler(this.button_choose_folder_Click);
             // 
+            // textBox_belief_system
+            // 
+            this.textBox_belief_system.Location = new System.Drawing.Point(563, 12);
+            this.textBox_belief_system.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.textBox_belief_system.Multiline = true;
+            this.textBox_belief_system.Name = "textBox_belief_system";
+            this.textBox_belief_system.ReadOnly = true;
+            this.textBox_belief_system.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
+            this.textBox_belief_system.Size = new System.Drawing.Size(545, 426);
+            this.textBox_belief_system.TabIndex = 4;
+            // 
             // Form2
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(427, 422);
+            this.ClientSize = new System.Drawing.Size(1114, 519);
+            this.Controls.Add(this.textBox_belief_system);
             this.Controls.Add(this.button_choose_folder);
             this.Controls.Add(this.textBox_file_path);
             this.Controls.Add(this.button_write_to_file);
             this.Controls.Add(this.textBox_result);
-            this.Margin = new System.Windows.Forms.Padding(2);
+            this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.Name = "Form2";
             this.Text = "Опис алгоритму роботи вирішувача";
             this.ResumeLayout(false);
@@ -97,5 +113,6 @@
         private System.Windows.Forms.TextBox textBox_file_path;
         private System.Windows.Forms.FolderBrowserDialog folderBrowserDialog1;
         private System.Windows.Forms.Button button_choose_folder;
+        private System.Windows.Forms.TextBox textBox_belief_system;
     }
 }
