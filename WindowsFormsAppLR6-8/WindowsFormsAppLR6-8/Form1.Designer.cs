@@ -30,6 +30,10 @@
         {
             this.dataGridView_facts = new System.Windows.Forms.DataGridView();
             this.dataGridView_rulebases = new System.Windows.Forms.DataGridView();
+            this.A = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.P = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.FunctionRulebase = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.InputFactRulebase = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.button_update_facts = new System.Windows.Forms.Button();
             this.button_add_selected_fact_to_rule = new System.Windows.Forms.Button();
             this.button_negation = new System.Windows.Forms.Button();
@@ -55,10 +59,8 @@
             this.Value = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Description = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.TargetFact = new System.Windows.Forms.DataGridViewCheckBoxColumn();
-            this.A = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.P = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.FunctionRulebase = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.InputFactRulebase = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.MessageStateTrue = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.MessageStateFalse = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView_facts)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView_rulebases)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView_opposite_facts)).BeginInit();
@@ -72,7 +74,9 @@
             this.dataGridView_facts.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.Value,
             this.Description,
-            this.TargetFact});
+            this.TargetFact,
+            this.MessageStateTrue,
+            this.MessageStateFalse});
             this.dataGridView_facts.Location = new System.Drawing.Point(10, 11);
             this.dataGridView_facts.Name = "dataGridView_facts";
             this.dataGridView_facts.RowHeadersWidth = 51;
@@ -93,6 +97,30 @@
             this.dataGridView_rulebases.RowHeadersWidth = 51;
             this.dataGridView_rulebases.Size = new System.Drawing.Size(540, 150);
             this.dataGridView_rulebases.TabIndex = 1;
+            // 
+            // A
+            // 
+            this.A.HeaderText = "Блок A";
+            this.A.MinimumWidth = 6;
+            this.A.Name = "A";
+            // 
+            // P
+            // 
+            this.P.HeaderText = "Блок P";
+            this.P.MinimumWidth = 6;
+            this.P.Name = "P";
+            // 
+            // FunctionRulebase
+            // 
+            this.FunctionRulebase.HeaderText = "Функція, яку слід виконати";
+            this.FunctionRulebase.MinimumWidth = 6;
+            this.FunctionRulebase.Name = "FunctionRulebase";
+            // 
+            // InputFactRulebase
+            // 
+            this.InputFactRulebase.HeaderText = "Факт, вхідний параметр функції";
+            this.InputFactRulebase.MinimumWidth = 6;
+            this.InputFactRulebase.Name = "InputFactRulebase";
             // 
             // button_update_facts
             // 
@@ -322,29 +350,15 @@
             this.TargetFact.MinimumWidth = 6;
             this.TargetFact.Name = "TargetFact";
             // 
-            // A
+            // MessageStateTrue
             // 
-            this.A.HeaderText = "Блок A";
-            this.A.MinimumWidth = 6;
-            this.A.Name = "A";
+            this.MessageStateTrue.HeaderText = "Повідомлення при true";
+            this.MessageStateTrue.Name = "MessageStateTrue";
             // 
-            // P
+            // MessageStateFalse
             // 
-            this.P.HeaderText = "Блок P";
-            this.P.MinimumWidth = 6;
-            this.P.Name = "P";
-            // 
-            // FunctionRulebase
-            // 
-            this.FunctionRulebase.HeaderText = "Функція, яку слід виконати";
-            this.FunctionRulebase.MinimumWidth = 6;
-            this.FunctionRulebase.Name = "FunctionRulebase";
-            // 
-            // InputFactRulebase
-            // 
-            this.InputFactRulebase.HeaderText = "Факт, вхідний параметр функції";
-            this.InputFactRulebase.MinimumWidth = 6;
-            this.InputFactRulebase.Name = "InputFactRulebase";
+            this.MessageStateFalse.HeaderText = "Повідомлення при false";
+            this.MessageStateFalse.Name = "MessageStateFalse";
             // 
             // Form1
             // 
@@ -404,13 +418,15 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn Fact;
         private System.Windows.Forms.DataGridViewTextBoxColumn FactStartState;
         private System.Windows.Forms.DataGridViewTextBoxColumn FactEndState;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Value;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Description;
-        private System.Windows.Forms.DataGridViewCheckBoxColumn TargetFact;
         private System.Windows.Forms.DataGridViewTextBoxColumn A;
         private System.Windows.Forms.DataGridViewTextBoxColumn P;
         private System.Windows.Forms.DataGridViewTextBoxColumn FunctionRulebase;
         private System.Windows.Forms.DataGridViewTextBoxColumn InputFactRulebase;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Value;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Description;
+        private System.Windows.Forms.DataGridViewCheckBoxColumn TargetFact;
+        private System.Windows.Forms.DataGridViewTextBoxColumn MessageStateTrue;
+        private System.Windows.Forms.DataGridViewTextBoxColumn MessageStateFalse;
     }
 }
 

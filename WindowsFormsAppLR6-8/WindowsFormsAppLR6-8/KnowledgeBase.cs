@@ -85,6 +85,9 @@ namespace WindowsFormsAppLR6_8
 
         public string StartCalculations()
         {
+            Report = "";
+            ReportForBeliefSystem = "";
+
             Report += FactualBasisToString() + Environment.NewLine;
             ReportForBeliefSystem += FactualBasisStartStateToString() + Environment.NewLine;
 

@@ -73,6 +73,9 @@ namespace WindowsFormsAppLR6_8
                     Convert.ToInt32(row.Cells[0].Value),
                     row.Cells[1].Value.ToString());
 
+            fact.MessageStateTrue = row.Cells[3].Value.ToString();
+            fact.MessageStateFalse = row.Cells[4].Value.ToString();
+
             DataGridViewCell cell = row.Cells[2];
             if (cell.Value != null && cell.Value.Equals(CheckState.Checked))//CheckState.Checked
             {
@@ -227,23 +230,12 @@ namespace WindowsFormsAppLR6_8
 
         private void button_describe_algorithm_Click(object sender, EventArgs e)//next
         {
-            KnowledgeBase.FactualBasis.ElementAt(0).MessageStateTrue = "вентиль гарячої води відкритий";
-            KnowledgeBase.FactualBasis.ElementAt(0).MessageStateTrue = "вентиль гарячої води закритий";
-            KnowledgeBase.FactualBasis.ElementAt(1).MessageStateTrue = "вентиль холодної води відкритий";
-            KnowledgeBase.FactualBasis.ElementAt(1).MessageStateTrue = "вентиль холодної води закритий";
-            KnowledgeBase.FactualBasis.ElementAt(2).MessageStateTrue = "вентиль гарячої води повністю відкритий";
-            KnowledgeBase.FactualBasis.ElementAt(2).MessageStateTrue = "вентиль гарячої води не повністю відкритий";
-            KnowledgeBase.FactualBasis.ElementAt(3).MessageStateTrue = "вентиль холодної води повністю відкритий";
-            KnowledgeBase.FactualBasis.ElementAt(3).MessageStateTrue = "вентиль холодної води не повністю відкритий";
-            KnowledgeBase.FactualBasis.ElementAt(4).MessageStateTrue = "вода стала гарячою";
-            KnowledgeBase.FactualBasis.ElementAt(4).MessageStateTrue = "";
-            KnowledgeBase.FactualBasis.ElementAt(5).MessageStateTrue = "вода стала холодною";
-            KnowledgeBase.FactualBasis.ElementAt(5).MessageStateTrue = "";
-            KnowledgeBase.FactualBasis.ElementAt(6).MessageStateTrue = "вода стала теплою";
-            KnowledgeBase.FactualBasis.ElementAt(6).MessageStateTrue = "";
-
-            KnowledgeBase.TargetFact.MessageStateTrue = "вода стала теплою";
-            KnowledgeBase.TargetFact.MessageStateFalse = "";
+            /*
+            button_update_facts_Click(sender, e);
+            button_update_knowledge_base_Click(sender, e);
+            button_update_relations_Click(sender, e);
+            button_update_opposite_facts_Click(sender, e);
+            */
 
             Form2 form = new Form2(knowledge_base);
             form.Show();
@@ -288,6 +280,10 @@ namespace WindowsFormsAppLR6_8
                 {
                     dataGridView_facts.Rows[i].Cells[2].Value = CheckState.Checked;
                 }
+
+                dataGridView_facts.Rows[i].Cells[3].Value = fact.MessageStateTrue;
+                dataGridView_facts.Rows[i].Cells[4].Value = fact.MessageStateFalse;
+
             }
 
             for (int i = 0; i < KnowledgeBase.OppositeFacts.Count; i++)
